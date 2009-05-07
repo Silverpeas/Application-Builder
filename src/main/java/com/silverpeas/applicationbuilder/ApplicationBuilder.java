@@ -1,0 +1,243 @@
+//Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\ApplicationBuilder.java
+package com.silverpeas.applicationbuilder;
+
+import com.silverpeas.applicationbuilder.maven.MavenContribution;
+import com.silverpeas.applicationbuilder.maven.MavenRepository;
+import java.io.File;
+import java.util.Iterator;
+
+import com.silverpeas.helpbuilder.AboutBuilder;
+import com.silverpeas.installedtree.DirectoryLocator;
+import com.silverpeas.version.ApplicationInfo;
+import com.silverpeas.version.PackageInfo;
+
+/**
+ * The main class of the ApplicationBuilder tool. Controls the overall sequence of
+ * the process. Holds the general information about the installed application
+ * structure.
+ * @author Silverpeas
+ * @version 1.0/B
+ * @since 1.0/B
+ */
+public class ApplicationBuilder {
+
+  private static final String APP_BUILDER_VERSION = "Application Builder V5.0";
+  private static final String APPLICATION_NAME = "Silverpeas";
+  private static final String APPLICATION_DESCRIPTION = "Collaborative portal organizer";
+  private static final String APPLICATION_ROOT = "silverpeas";
+  private static String extRepositoryPath = null;
+  //private Client theClient = null;
+  private EAR theEAR = null;
+  private MavenRepository theRepository = null;
+  private MavenRepository theExternalRepository = null;
+
+  public ApplicationBuilder() throws AppBuilderException {
+    boolean errorFound = false;
+    // instantiates source and target objects
+    try {
+      theRepository = new MavenRepository();
+      if (extRepositoryPath != null) {
+        DirectoryLocator.setRepositoryHome(extRepositoryPath);
+        theExternalRepository = new MavenRepository();
+      }
+    }
+    catch (AppBuilderException abe) {
+      Log.add(abe);
+      errorFound = true;
+    }
+    try {
+      theEAR = new EAR(new File(DirectoryLocator.getLibraryHome()));
+    }
+    catch (AppBuilderException abe) {
+      Log.add(abe);
+      errorFound = true;
+    }
+    if (errorFound) {
+      throw new AppBuilderException();
+    }
+  }
+
+  /**
+   * Gets the Repository object
+   *
+   * @return the repository object
+   * @since 1.0/B
+   * @roseuid 3AAF75C6001A
+   */
+  public MavenRepository getRepository() {
+    return theRepository;
+  }
+
+  /**
+   * Gets the External Repository object
+   *
+   * @return the repository object
+   * @since 1.0/B
+   * @roseuid 3AAF75C6001A
+   */
+  public MavenRepository getExternalRepository() {
+    return theExternalRepository;
+  }
+
+  /**
+   * @return the EAR object
+   * @since 1.0/B
+   * @roseuid 3AAF989A0256
+   */
+  public EAR getEAR() {
+
+    return theEAR;
+  }
+
+  /**
+   * @return the Client object
+   * @since 1.0/B
+   * @roseuid 3AAFA81703A2
+   */
+  /*public Client getClient() {
+
+  return theClient;
+  }*/
+  /**
+   * The unique method that provides the application name
+   * @roseuid 3AAF9A5300BF
+   */
+  public static String getApplicationName() {
+    return APPLICATION_NAME;
+  }
+
+  /**
+   * The unique method that provides the application description
+   */
+  public static String getApplicationDescription() {
+    return APPLICATION_DESCRIPTION;
+  }
+
+  /**
+   * @return the root used to access the application with a browser
+   */
+  public static String getApplicationRoot() {
+    return APPLICATION_ROOT;
+  }
+
+  private static void makeArchivesToDeploy()
+      throws AppBuilderException {
+    try {
+      AboutBuilder ab = new AboutBuilder();
+      Log.echo("About page generated successfully " + ab.toString());
+    }
+    catch (Throwable t) {
+      Log.echo("WARNING : problem generating about page");
+      Log.add(t);
+    }
+
+    Log.echo("CHECKING REPOSITORY");
+    ApplicationBuilder appBuilder = new ApplicationBuilder();
+    Log.add("Repository OK");
+
+    Log.echo("GENERATING APPLICATION FOR JBOSS");
+    Log.setEchoAsDotEnabled(true);
+    // get the contributions
+    MavenContribution[] lesContributions = appBuilder.getRepository().getContributions();
+
+    // loop the contributions
+    for (MavenContribution maContrib : lesContributions) {
+      // identify the contribution
+      Log.add("");
+      Log.add("ADDING \"" + maContrib.getPackageName() + "\" of type \"" + maContrib.getPackageType() + "\"");
+      // libraries
+      if (maContrib.getLibraries() != null) {
+        Log.add("merging libraries");
+        //appBuilder.getClient().mergeLibraries(maContrib.getLibraries());
+        appBuilder.getEAR().addLibraries(maContrib.getLibraries());
+      }
+      // client
+      if (maContrib.getClientPart() != null) {
+        Log.add("merging client part");
+        //appBuilder.getClient().mergeClientPart(maContrib.getClientPart());
+        appBuilder.getEAR().addLibrary(maContrib.getClientPart());
+      }
+
+      // WAR
+      if (maContrib.getWARPart() != null) {
+        Log.add("merging WAR part");
+        appBuilder.getEAR().getWAR().mergeWARPart(maContrib.getWARPart());
+      }
+      // EJBs
+      if (maContrib.getEJBs() != null) {
+        Log.add("adding EJBs");
+        appBuilder.getEAR().addEJBs(maContrib.getEJBs());
+      }
+
+    }
+
+    if (appBuilder.getExternalRepository() != null) {
+      // loop the external contributions
+      MavenContribution[] lesContributionsExternes = appBuilder.getExternalRepository().getContributions();
+      for (MavenContribution maContrib : lesContributionsExternes) {
+        // identify the contribution
+        Log.add("");
+        Log.add("ADDING \"" + maContrib.getPackageName() + "\" of type \"" + maContrib.getPackageType() + "\"");
+        // client
+        if (maContrib.getClientPart() != null) {
+          Log.add("merging client part");
+          //appBuilder.getClient().mergeClientPart(maContrib.getClientPart());
+        }
+        // libraries
+        if (maContrib.getLibraries() != null) {
+          Log.add("merging libraries");
+          //appBuilder.getClient().mergeLibraries(maContrib.getLibraries());
+        }
+        // WAR
+        if (maContrib.getWARPart() != null) {
+          Log.add("merging WAR part");
+          appBuilder.getEAR().getWAR().mergeWARPart(maContrib.getWARPart());
+        }
+        // EJBs
+        if (maContrib.getEJBs() != null) {
+          Log.add("adding EJBs");
+          appBuilder.getEAR().addEJBs(maContrib.getEJBs());
+        }
+
+      }
+    }
+
+    appBuilder.getEAR().close();
+    Log.add("");
+    Log.setEchoAsDotEnabled(false);
+    Log.echo("OK : \"" + appBuilder.getEAR().getName() + "\" successfully builded");
+    Log.echo("Please find them in \"" + DirectoryLocator.getLibraryHome() + "\"");
+    System.out.println(
+        "Full log is available in \"" + DirectoryLocator.getLogHome() + File.separator + Log.getName() + "\"");
+  }
+
+  private static void endLoggingWithErrors() {
+    Log.setEchoAsDotEnabled(false);
+    Log.add("");
+    Log.echo("ERRORS encountered : build aborted", System.err);
+    System.err.println(
+        "see \"" + DirectoryLocator.getLogHome() + File.separator + Log.getName() + "\" for details");
+  }
+
+  /**
+   * @roseuid 3AB1EC140270
+   */
+  public static void main(String[] args) {
+    try {
+      Log.echo("___ " + APP_BUILDER_VERSION + " ___");
+      Log.add("");
+      makeArchivesToDeploy();
+    }
+    catch (AppBuilderException abe) {
+      Log.echo(abe);
+      endLoggingWithErrors();
+    }
+    catch (Throwable t) {
+      Log.echo(t);
+      endLoggingWithErrors();
+    }
+    finally {
+      Log.close();
+    }
+  }
+}
