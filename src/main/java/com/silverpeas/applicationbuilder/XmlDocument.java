@@ -17,6 +17,7 @@ import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -148,12 +149,14 @@ public class XmlDocument extends ApplicationBuilderItem {
     org.jdom.Document documentToBeMerged = (org.jdom.Document) XmlFile.getDocument().clone();
     Element tempRoot = documentToBeMerged.getRootElement();
 
+
     /** gets all the elements which will be included in the resulting document */
     for (int iTag = 0; iTag < tagsToMerge.length; iTag++) {
-      for (Object child : tempRoot.getChildren(tagsToMerge[iTag])) {
-        if (child instanceof Content) {
-          Content newElement = (Content) ((Content) child).clone();
+      for (Object child : tempRoot.getChildren(tagsToMerge[iTag],tempRoot.getNamespace())) {
+        if (child instanceof Element) {
+          Element newElement = (Element) ((Element) child).clone();
           newElement.detach();
+          newElement.setNamespace(root.getNamespace());
           root.addContent(newElement);
         }
       }
@@ -184,7 +187,7 @@ public class XmlDocument extends ApplicationBuilderItem {
     /** Makes groups of elements by tag */
     List eltLstLst = new ArrayList(tagsToSort.length);
     for (int iTag = 0; iTag < tagsToSort.length; iTag++) {
-      List children = root.getChildren(tagsToSort[iTag]);
+      List children = root.getChildren(tagsToSort[iTag], root.getNamespace());
       List eltLst = new ArrayList();
       if (children != null && !children.isEmpty()) {        
         for (Object child : children) {
