@@ -21,18 +21,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\ApplicationBuilder.java
 package com.silverpeas.applicationbuilder;
 
 import com.silverpeas.applicationbuilder.maven.MavenContribution;
 import com.silverpeas.applicationbuilder.maven.MavenRepository;
 import java.io.File;
-import java.util.Iterator;
 
-import com.silverpeas.helpbuilder.AboutBuilder;
 import com.silverpeas.installedtree.DirectoryLocator;
-import com.silverpeas.version.ApplicationInfo;
-import com.silverpeas.version.PackageInfo;
 
 /**
  * The main class of the ApplicationBuilder tool. Controls the overall sequence of
@@ -49,7 +44,6 @@ public class ApplicationBuilder {
   private static final String APPLICATION_DESCRIPTION = "Collaborative portal organizer";
   private static final String APPLICATION_ROOT = "silverpeas";
   private static String extRepositoryPath = null;
-  //private Client theClient = null;
   private EAR theEAR = null;
   private MavenRepository theRepository = null;
   private MavenRepository theExternalRepository = null;
@@ -145,15 +139,6 @@ public class ApplicationBuilder {
 
   private static void makeArchivesToDeploy()
       throws AppBuilderException {
-    try {
-      AboutBuilder ab = new AboutBuilder();
-      Log.echo("About page generated successfully " + ab.toString());
-    }
-    catch (Throwable t) {
-      Log.echo("WARNING : problem generating about page");
-      Log.add(t);
-    }
-
     Log.echo("CHECKING REPOSITORY");
     ApplicationBuilder appBuilder = new ApplicationBuilder();
     Log.add("Repository OK");
@@ -171,7 +156,6 @@ public class ApplicationBuilder {
       // libraries
       if (maContrib.getLibraries() != null) {
         Log.add("merging libraries");
-        //appBuilder.getClient().mergeLibraries(maContrib.getLibraries());
         appBuilder.getEAR().addLibraries(maContrib.getLibraries());
       }
       // client
@@ -204,12 +188,10 @@ public class ApplicationBuilder {
         // client
         if (maContrib.getClientPart() != null) {
           Log.add("merging client part");
-          //appBuilder.getClient().mergeClientPart(maContrib.getClientPart());
         }
         // libraries
         if (maContrib.getLibraries() != null) {
           Log.add("merging libraries");
-          //appBuilder.getClient().mergeLibraries(maContrib.getLibraries());
         }
         // WAR
         if (maContrib.getWARPart() != null) {

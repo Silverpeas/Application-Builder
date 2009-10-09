@@ -50,6 +50,7 @@ public class EAR extends EARDirectory {
 		super(directory, NAME);
 		setWAR(this.earDir);
 		setAppDescriptor();
+        setName(NAME);
 	}
 
 	/**
