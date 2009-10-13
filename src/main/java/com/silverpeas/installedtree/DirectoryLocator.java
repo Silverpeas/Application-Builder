@@ -95,7 +95,7 @@ public class DirectoryLocator {
 	 */
 	static public String getApplicationHome() {
 		if (applicationHome == null) {
-			applicationHome = getSilverpeasHome() + File.separator + APPLICATION_HOME_SUBDIR;
+			applicationHome = getSilverpeasHome();
 		}
 		return applicationHome;
 	}
