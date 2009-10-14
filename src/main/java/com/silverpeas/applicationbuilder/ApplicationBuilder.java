@@ -30,9 +30,10 @@ import java.io.File;
 import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
- * The main class of the ApplicationBuilder tool. Controls the overall sequence of
- * the process. Holds the general information about the installed application
+ * The main class of the ApplicationBuilder tool. Controls the overall sequence
+ * of the process. Holds the general information about the installed application
  * structure.
+ * 
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -57,15 +58,13 @@ public class ApplicationBuilder {
         DirectoryLocator.setRepositoryHome(extRepositoryPath);
         theExternalRepository = new MavenRepository();
       }
-    }
-    catch (AppBuilderException abe) {
+    } catch (AppBuilderException abe) {
       Log.add(abe);
       errorFound = true;
     }
     try {
       theEAR = new EAR(new File(DirectoryLocator.getLibraryHome()));
-    }
-    catch (AppBuilderException abe) {
+    } catch (AppBuilderException abe) {
       Log.add(abe);
       errorFound = true;
     }
@@ -76,7 +75,7 @@ public class ApplicationBuilder {
 
   /**
    * Gets the Repository object
-   *
+   * 
    * @return the repository object
    * @since 1.0/B
    * @roseuid 3AAF75C6001A
@@ -87,7 +86,7 @@ public class ApplicationBuilder {
 
   /**
    * Gets the External Repository object
-   *
+   * 
    * @return the repository object
    * @since 1.0/B
    * @roseuid 3AAF75C6001A
@@ -111,12 +110,14 @@ public class ApplicationBuilder {
    * @since 1.0/B
    * @roseuid 3AAFA81703A2
    */
-  /*public Client getClient() {
-
-  return theClient;
-  }*/
+  /*
+   * public Client getClient() {
+   * 
+   * return theClient; }
+   */
   /**
    * The unique method that provides the application name
+   * 
    * @roseuid 3AAF9A5300BF
    */
   public static String getApplicationName() {
@@ -220,8 +221,8 @@ public class ApplicationBuilder {
     Log.setEchoAsDotEnabled(false);
     Log.add("");
     Log.echo("ERRORS encountered : build aborted", System.err);
-    System.err.println(
-        "see \"" + DirectoryLocator.getLogHome() + File.separator + Log.getName() + "\" for details");
+    System.err.println("see \"" + DirectoryLocator.getLogHome()
+        + File.separator + Log.getName() + "\" for details");
   }
 
   /**
@@ -232,16 +233,13 @@ public class ApplicationBuilder {
       Log.echo("___ " + APP_BUILDER_VERSION + " ___");
       Log.add("");
       makeArchivesToDeploy();
-    }
-    catch (AppBuilderException abe) {
+    } catch (AppBuilderException abe) {
       Log.echo(abe);
       endLoggingWithErrors();
-    }
-    catch (Throwable t) {
+    } catch (Throwable t) {
       Log.echo(t);
       endLoggingWithErrors();
-    }
-    finally {
+    } finally {
       Log.close();
     }
   }

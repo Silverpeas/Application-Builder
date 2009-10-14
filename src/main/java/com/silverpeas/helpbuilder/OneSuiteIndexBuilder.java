@@ -35,90 +35,85 @@ import com.silverpeas.version.ApplicationInfo;
 import com.silverpeas.version.JobBoxInfo;
 import com.silverpeas.version.PackageInfo;
 
-
 /**
- * Titre :        Application Builder
- * Description :
- * Copyright :    Copyright (c) 2001
- * Société :      Stratélia
+ * Titre : Application Builder Description : Copyright : Copyright (c) 2001
+ * Société : Stratélia
+ * 
  * @author Jean-Christophe Carry
  * @version 1.0
  */
 
 public class OneSuiteIndexBuilder extends TemplateBasedBuilder {
 
-	private static final String suiteName = "suite-silverpeas.htm";
+  private static final String suiteName = "suite-silverpeas.htm";
 
-	public OneSuiteIndexBuilder() throws IOException, Exception{
-		super(suiteName);
-		// writeInDirectory(DirectoryLocator.getHelpHome());
-		getTargetContents();
-	}
+  public OneSuiteIndexBuilder() throws IOException, Exception {
+    super(suiteName);
+    // writeInDirectory(DirectoryLocator.getHelpHome());
+    getTargetContents();
+  }
 
-	// surcharge de la methode parente
-	public String getTargetContents() throws IOException, Exception {
+  // surcharge de la methode parente
+  public String getTargetContents() throws IOException, Exception {
 
-		if (targetFileContents == null) {
+    if (targetFileContents == null) {
 
-		        Iterator iBox = ApplicationInfo.getJobBoxes().iterator();
-		        Iterator iPackage = null;
-		        JobBoxInfo boxInfo = null;
-		        PackageInfo packInfo = null;
-			String master = null;
-		        String tmpBoxes = "";
-		        String tmpStr = null;
+      Iterator iBox = ApplicationInfo.getJobBoxes().iterator();
+      Iterator iPackage = null;
+      JobBoxInfo boxInfo = null;
+      PackageInfo packInfo = null;
+      String master = null;
+      String tmpBoxes = "";
+      String tmpStr = null;
 
-		        while (iBox.hasNext()) {
-				boxInfo = (JobBoxInfo)iBox.next();
-				iPackage = boxInfo.getPackages().iterator();
-				String tmpPackages = "";
+      while (iBox.hasNext()) {
+        boxInfo = (JobBoxInfo) iBox.next();
+        iPackage = boxInfo.getPackages().iterator();
+        String tmpPackages = "";
 
-			        tmpStr = getBoxTemplate();
+        tmpStr = getBoxTemplate();
 
-			        tmpStr= setTemplateValue(
-					tmpStr,
-					boxNamePlaceHolder,
-					boxInfo.getName());
+        tmpStr = setTemplateValue(tmpStr, boxNamePlaceHolder, boxInfo.getName());
 
-				while (iPackage.hasNext()) {
-				        packInfo = (PackageInfo)iPackage.next();
-					if (isPackagePertinent(packInfo)) {
-						tmpPackages+=getPackageContents(packInfo);
-				        }
-				} // while (packages)
+        while (iPackage.hasNext()) {
+          packInfo = (PackageInfo) iPackage.next();
+          if (isPackagePertinent(packInfo)) {
+            tmpPackages += getPackageContents(packInfo);
+          }
+        } // while (packages)
 
-			        master = getMasterTemplate();
+        master = getMasterTemplate();
 
-				targetFileContents = setTemplateValue(
-	        			master,
-		        		boxesContentsPlaceHolder,
-			        	tmpStr);
+        targetFileContents = setTemplateValue(master, boxesContentsPlaceHolder,
+            tmpStr);
 
-			        targetFileContents= setTemplateValue(
-						targetFileContents,
-						packagesContentsPlaceHolder,
-						tmpPackages);
+        targetFileContents = setTemplateValue(targetFileContents,
+            packagesContentsPlaceHolder, tmpPackages);
 
-				// sauvegarde en renommant
-				Reader srcText = new StringReader(targetFileContents);
-				FileWriter out = new FileWriter(new File(DirectoryLocator.getHelpHome(), PackageInfo.specialName(boxInfo.getName()) + "-" + suiteName));
-				int charsRead;
-				while ((charsRead = srcText.read(data, 0, BUFSIZE)) > 0 ) {
-					out.write(data, 0, charsRead);
-				}
-				out.close();
-				srcText.close();
+        // sauvegarde en renommant
+        Reader srcText = new StringReader(targetFileContents);
+        FileWriter out = new FileWriter(new File(
+            DirectoryLocator.getHelpHome(), PackageInfo.specialName(boxInfo
+                .getName())
+                + "-" + suiteName));
+        int charsRead;
+        while ((charsRead = srcText.read(data, 0, BUFSIZE)) > 0) {
+          out.write(data, 0, charsRead);
+        }
+        out.close();
+        srcText.close();
 
-		        } //while (boxes)
+      } // while (boxes)
 
-		} // if
+    } // if
 
-		return null;
-	}
+    return null;
+  }
 
-	protected boolean isPackagePertinent(PackageInfo packInfo) throws Exception {
-		String packageUrl = packInfo.getName()+File.separator+packInfo.getName()+".htm";
-		File packageIndex = new File(DirectoryLocator.getHelpHome(), packageUrl);
-		return packageIndex.exists();
-	}
+  protected boolean isPackagePertinent(PackageInfo packInfo) throws Exception {
+    String packageUrl = packInfo.getName() + File.separator
+        + packInfo.getName() + ".htm";
+    File packageIndex = new File(DirectoryLocator.getHelpHome(), packageUrl);
+    return packageIndex.exists();
+  }
 }

@@ -28,24 +28,17 @@ import org.jdom.IllegalNameException;
 
 //import org.apache.xerces.utils.XMLCharacterProperties;
 /**
- * Titre :        Application Builder
- * Description : implements a simplified XPath parser that retrieves the different
- * token composing a XPath
- * Tokens are named by the public fields
- * STEP_SEPARATOR ('/')
- * PREDICATE_OPEN ('[')
- * PREDICATE_CLOSE (']')
- * EQUALITY ('=')
- * DOT ('.' the abreviated step)
- * ABREV_ATTRIBAXIS ('@' the abreviated attribute axis specifier)
- * PARENT_STEP ("..")
- * LITERAL (string enclosed by quotation marks or apostrophes)
- * INTEGER (greater or equal to zero)
- * REAL (greater or equal to zero)
- * NAME (a valid Name as specified in W3C XML 1.0 Recommendation)
- *
- * Copyright :    Copyright (c) 2001
- * Société :      Stratélia
+ * Titre : Application Builder Description : implements a simplified XPath
+ * parser that retrieves the different token composing a XPath Tokens are named
+ * by the public fields STEP_SEPARATOR ('/') PREDICATE_OPEN ('[')
+ * PREDICATE_CLOSE (']') EQUALITY ('=') DOT ('.' the abreviated step)
+ * ABREV_ATTRIBAXIS ('@' the abreviated attribute axis specifier) PARENT_STEP
+ * ("..") LITERAL (string enclosed by quotation marks or apostrophes) INTEGER
+ * (greater or equal to zero) REAL (greater or equal to zero) NAME (a valid Name
+ * as specified in W3C XML 1.0 Recommendation)
+ * 
+ * Copyright : Copyright (c) 2001 Société : Stratélia
+ * 
  * @author Jean-Christophe Carry
  * @version 1.0
  */
@@ -61,7 +54,7 @@ public class XPathTokenizer {
 
   // ######### getters and setters ##########
   public void reinitRead() {
-//		removeStates();
+    // removeStates();
     setIndex(0);
     setIndexAsPosition();
     setCurrentToken(null);
@@ -76,6 +69,7 @@ public class XPathTokenizer {
   public String getXPath() {
     return _xpath;
   }
+
   private String _xpath = null;
   // ######### lexical analyser ##########
   // used as lexical elements and as lexical element types
@@ -97,7 +91,8 @@ public class XPathTokenizer {
   private static final char LITERAL_DELIM_SINGLE = '\'';
   private static final char LITERAL_DELIM_DOUBLE = '"';
   // used to parse numbers
-  private static char[] DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+  private static char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8',
+      '9' };
 
   static {
     Arrays.sort(DIGITS);
@@ -123,6 +118,7 @@ public class XPathTokenizer {
   public int getCurrentTokenPosition() {
     return _tokenPosition;
   }
+
   private int _iXpath;
   private int _tokenPosition;
   private String _token = null;
@@ -165,7 +161,9 @@ public class XPathTokenizer {
 
   /**
    * Sets the token found
-   * @return the lexical element type. If getCurrentToken() is null, it is also the element itself.
+   * 
+   * @return the lexical element type. If getCurrentToken() is null, it is also
+   *         the element itself.
    */
   public char readNextToken() throws XPathParseException {
     setIndexAsPosition();
@@ -196,19 +194,19 @@ public class XPathTokenizer {
         break;
       // Abreviated steps or Number start
       case DOT:
-        if (getXPath().length() > getIndex() + 1 && getXPath().charAt(getIndex() + 1) == DOT) {
+        if (getXPath().length() > getIndex() + 1
+            && getXPath().charAt(getIndex() + 1) == DOT) {
           setCurrentTokenType(PARENT_STEP);
-          setCurrentToken(new String(new char[]{DOT, DOT}));
+          setCurrentToken(new String(new char[] { DOT, DOT }));
           setIndex(getIndex() + 2);
-        }
-        else {
+        } else {
           int iStartStepOrNumber = getIndex();
           setIndex(getIndex() + 1);
           if (readDigits()) {
             setCurrentTokenType(REAL);
-            setCurrentToken(getXPath().substring(iStartStepOrNumber, getIndex()));
-          }
-          else {
+            setCurrentToken(getXPath()
+                .substring(iStartStepOrNumber, getIndex()));
+          } else {
             setCurrentToken(null);
             setCurrentTokenType(DOT);
           }
@@ -238,26 +236,22 @@ public class XPathTokenizer {
         setIndex(getIndex() + 1);
         int iDelimSingle = getXPath().indexOf(LITERAL_DELIM_SINGLE, getIndex());
         if (iDelimSingle == -1) {
-          throw new XPathParseException("literal not closed", getXPath(), getIndex());
+          throw new XPathParseException("literal not closed", getXPath(),
+              getIndex());
         }
         setCurrentTokenType(LITERAL);
-        setCurrentToken(
-            getXPath().substring(
-            getIndex(),
-            iDelimSingle));
+        setCurrentToken(getXPath().substring(getIndex(), iDelimSingle));
         setIndex(iDelimSingle + 1);
         break;
       case LITERAL_DELIM_DOUBLE:
         setIndex(getIndex() + 1);
         int iDelimDouble = getXPath().indexOf(LITERAL_DELIM_DOUBLE, getIndex());
         if (iDelimDouble == -1) {
-          throw new XPathParseException("literal not closed", getXPath(), getIndex());
+          throw new XPathParseException("literal not closed", getXPath(),
+              getIndex());
         }
         setCurrentTokenType(LITERAL);
-        setCurrentToken(
-            getXPath().substring(
-            getIndex(),
-            iDelimDouble));
+        setCurrentToken(getXPath().substring(getIndex(), iDelimDouble));
         setIndex(iDelimDouble + 1);
         break;
       // Number
@@ -275,7 +269,8 @@ public class XPathTokenizer {
         setCurrentTokenType(INTEGER);
         int iStartNumber = getIndex();
         readDigits();
-        if (getIndex() < getXPath().length() && getXPath().charAt(getIndex()) == DOT) {
+        if (getIndex() < getXPath().length()
+            && getXPath().charAt(getIndex()) == DOT) {
           setCurrentTokenType(REAL);
           setIndex(getIndex() + 1);
           readDigits();
@@ -288,22 +283,22 @@ public class XPathTokenizer {
         boolean nameFound = false;
         setIndex(getIndex() + 1);
         try {
-          while (getIndex() <= getXPath().length() && isValidName(
-              getXPath().substring(iStartName, getIndex()))) {
+          while (getIndex() <= getXPath().length()
+              && isValidName(getXPath().substring(iStartName, getIndex()))) {
             nameFound = true;
             setIndex(getIndex() + 1);
           }
-        }
-        catch (RuntimeException re) {
-          throw new XPathParseException("unauthorised char in XML name", getXPath(), getIndex());
+        } catch (RuntimeException re) {
+          throw new XPathParseException("unauthorised char in XML name",
+              getXPath(), getIndex());
         }
         if (nameFound) {
           setCurrentTokenType(NAME);
           setIndex(getIndex() - 1);
           setCurrentToken(getXPath().substring(iStartName, getIndex()));
-        }
-        else {
-          throw new XPathParseException("unauthorised char", getXPath(), iStartName + 1);
+        } else {
+          throw new XPathParseException("unauthorised char", getXPath(),
+              iStartName + 1);
         }
         break;
     }
@@ -313,7 +308,8 @@ public class XPathTokenizer {
 
   private boolean readDigits() {
     boolean found = false;
-    while (getIndex() < getXPath().length() && Arrays.binarySearch(DIGITS, getXPath().charAt(getIndex())) >= 0) {
+    while (getIndex() < getXPath().length()
+        && Arrays.binarySearch(DIGITS, getXPath().charAt(getIndex())) >= 0) {
       found = true;
       setIndex(getIndex() + 1);
     }
@@ -324,8 +320,7 @@ public class XPathTokenizer {
     try {
       new org.jdom.Element(name);
       return true;
-    }
-    catch (IllegalNameException e) {
+    } catch (IllegalNameException e) {
       return false;
     }
   }

@@ -26,210 +26,213 @@ package com.silverpeas.installedtree;
 import java.io.File;
 
 /**
- * Titre :        Application Builder
- * Description :
- * Copyright :    Copyright (c) 2001
- * Société :      Stratélia
+ * Titre : Application Builder Description : Copyright : Copyright (c) 2001
+ * Société : Stratélia
+ * 
  * @author Jean-Christophe Carry
  * @version 1.0
  */
 
 public class DirectoryLocator {
+  // Sublevel 1
+  private static final String PROPERTIES_HOME_SUBDIR = "properties";
+  private static final String HELP_HOME_SUBDIR = "help" + File.separator + "fr";
+  private static final String LOG_SUBDIR = "log";
+  private static final String LIB_SUBDIR = "jar";
+  private static final String REPOSITORY_SUBDIR = "repository";
+  private static final String VERSION_SUBDIR = "version";
+  private static final String TEMP_SUBDIR = "temp";
 
-	/* CONSTANTS */
+  // Contributed pieces Sublevels (repository sublevels)
+  private static final String WAR_CONTRIB_SUBDIR = "war";
+  private static final String CLIENT_CONTRIB_SUBDIR = "client";
+  private static final String LIB_CONTRIB_SUBDIR = "java";
+  private static final String CONTRIB_FILES_SUBDIR = "data";
+  private static final String EJB_CONTRIB_SUBDIR = "ejb";
 
-	// Application level
-	private static final String APPLICATION_HOME_SUBDIR = "silverpeas";
+  /* MEMBERS */
 
-	// Sublevel 1
-	private static final String PROPERTIES_HOME_SUBDIR = "properties";
-	private static final String HELP_HOME_SUBDIR = "help"+File.separator+"fr";
-	private static final String LOG_SUBDIR = "log";
-	private static final String LIB_SUBDIR = "jar";
-	private static final String REPOSITORY_SUBDIR = "repository";
-	private static final String VERSION_SUBDIR = "version";
-	private static final String TEMP_SUBDIR = "temp";
+  // Install location
+  private static String silverpeasHome = null;
+  // Application level
+  private static String applicationHome = null;
+  // Sublevel 1
+  private static String propertiesHome = null;
+  private static String helpHome = null;
+  private static String logHome = null;
+  private static String libHome = null;
+  private static String repositoryHome = null;
+  private static String versionHome = null;
+  private static String tempHome = null;
 
-	// Contributed pieces Sublevels (repository sublevels)
-	private static final String WAR_CONTRIB_SUBDIR = "war";
-	private static final String CLIENT_CONTRIB_SUBDIR = "client";
-	private static final String LIB_CONTRIB_SUBDIR = "java";
-	private static final String CONTRIB_FILES_SUBDIR = "data";
-	private static final String EJB_CONTRIB_SUBDIR = "ejb";
+  // Contributed pieces locations
+  private static String warContribHome = null;
+  private static String clientContribHome = null;
+  private static String libContribHome = null;
+  private static String ejbContribHome = null;
+  private static String contribFilesHome = null;
 
-	/* MEMBERS */
+  /**
+   * @return the Silverpeas install location
+   */
+  public static String getSilverpeasHome() {
+    if (silverpeasHome == null) {
+      silverpeasHome = SilverpeasHomeResolver.getHome();
+    }
+    return silverpeasHome;
+  }
 
-	// Install location
-	private static String silverpeasHome = null;
-	// Application level
-	private static String applicationHome = null;
-	// Sublevel 1
-	private static String propertiesHome = null;
-	private static String helpHome = null;
-	private static String logHome = null;
-	private static String libHome = null;
-	private static String repositoryHome = null;
-	private static String versionHome = null;
-	private static String tempHome = null;
-	
-	// Contributed pieces locations
-	private static String warContribHome = null;
-	private static String clientContribHome = null;
-	private static String libContribHome = null;
-	private static String ejbContribHome = null;
-	private static String contribFilesHome = null;
+  /**
+   * @return the root directory of Silverpeas installed tree. the parent of
+   *         'bin', 'properties', etc.
+   */
+  static public String getApplicationHome() {
+    if (applicationHome == null) {
+      applicationHome = getSilverpeasHome();
+    }
+    return applicationHome;
+  }
 
-	/**
-	 * @return the Silverpeas install location
-	 */
-	public static String getSilverpeasHome() {
-		if (silverpeasHome == null) {
-			silverpeasHome = SilverpeasHomeResolver.getHome();
-		}
-		return silverpeasHome;
-	}
+  /**
+   * @return the root directory of the properties tree
+   */
+  public static String getPropertiesHome() {
+    if (propertiesHome == null) {
+      propertiesHome = getApplicationHome() + File.separator
+          + PROPERTIES_HOME_SUBDIR;
+    }
+    return propertiesHome;
+  }
 
-	/**
-	 * @return the root directory of Silverpeas installed tree. the parent of 'bin',
-	 * 'properties', etc.
-	 */
-	static public String getApplicationHome() {
-		if (applicationHome == null) {
-			applicationHome = getSilverpeasHome();
-		}
-		return applicationHome;
-	}
+  /**
+   * @return a map of the help paths (String) indexed by the locales("fr", "en",
+   *         "de", ...)
+   */
+  public static String getHelpHome() {
+    if (helpHome == null) {
+      helpHome = getApplicationHome() + File.separator + HELP_HOME_SUBDIR;
+    }
+    return helpHome;
+  }
 
-	/**
-	 * @return the root directory of the properties tree
-	 */
-	public static String getPropertiesHome() {
-		if (propertiesHome == null) {
-			propertiesHome = getApplicationHome() + File.separator + PROPERTIES_HOME_SUBDIR;
-		}
-		return propertiesHome;
-	}
+  /**
+   * @return the log directory
+   */
+  public static String getLogHome() {
+    if (logHome == null) {
+      logHome = getApplicationHome() + File.separator + LOG_SUBDIR;
+    }
+    return logHome;
+  }
 
-	/**
-	 * @return a map of the help paths (String) indexed by the locales("fr", "en", "de", ...)
-	 */
-	public static String getHelpHome() {
-		if (helpHome == null) {
-			helpHome = getApplicationHome()+File.separator+HELP_HOME_SUBDIR;
-		}
-		return helpHome;
-	}
+  /**
+   * @return the version directory
+   */
+  public static String getVersionHome() {
+    if (versionHome == null) {
+      versionHome = getApplicationHome() + File.separator + VERSION_SUBDIR;
+    }
+    return versionHome;
+  }
 
-	/**
-	 * @return the log directory
-	 */
-	public static String getLogHome() {
-		if (logHome == null) {
-			logHome = getApplicationHome()+File.separator+LOG_SUBDIR;
-		}
-		return logHome;
-	}
+  /**
+   * @return the jar directory
+   */
+  public static String getLibraryHome() {
+    if (libHome == null) {
+      libHome = getApplicationHome() + File.separator + LIB_SUBDIR;
+    }
+    return libHome;
+  }
 
-	/**
-	 * @return the version directory
-	 */
-	public static String getVersionHome() {
-		if (versionHome == null) {
-			versionHome = getApplicationHome()+File.separator+VERSION_SUBDIR;
-		}
-		return versionHome;
-	}
+  /**
+   * @return the temp directory
+   */
+  public static String getTempHome() {
+    if (tempHome == null) {
+      tempHome = getApplicationHome() + File.separator + TEMP_SUBDIR;
+    }
+    return tempHome;
+  }
 
-	/**
-	 * @return the jar directory
-	 */
-	public static String getLibraryHome() {
-		if (libHome == null) {
-			libHome = getApplicationHome()+File.separator+LIB_SUBDIR;
-		}
-		return libHome;
-	}
+  /**
+   * @return the repository directory
+   */
+  public static void setRepositoryHome(String repository) {
+    repositoryHome = getApplicationHome() + File.separator + repository;
+    warContribHome = getRepositoryHome() + File.separator + WAR_CONTRIB_SUBDIR;
+    clientContribHome = getRepositoryHome() + File.separator
+        + CLIENT_CONTRIB_SUBDIR;
+    libContribHome = getRepositoryHome() + File.separator + LIB_CONTRIB_SUBDIR;
+    ejbContribHome = getRepositoryHome() + File.separator + EJB_CONTRIB_SUBDIR;
+    contribFilesHome = getRepositoryHome() + File.separator
+        + CONTRIB_FILES_SUBDIR;
+  }
 
-	/**
-	 * @return the temp directory
-	 */
-	public static String getTempHome() {
-		if (tempHome == null) {
-			tempHome = getApplicationHome()+File.separator+TEMP_SUBDIR;
-		}
-		return tempHome;
-	}
+  /**
+   * @return the repository directory
+   */
+  public static String getRepositoryHome() {
+    if (repositoryHome == null) {
+      repositoryHome = getApplicationHome() + File.separator
+          + REPOSITORY_SUBDIR;
+    }
+    return repositoryHome;
+  }
 
-	/**
-	 * @return the repository directory
-	 */
-	public static void setRepositoryHome(String repository) {
-		repositoryHome = getApplicationHome()+File.separator+repository;
-		warContribHome = getRepositoryHome()+File.separator+WAR_CONTRIB_SUBDIR;
-		clientContribHome = getRepositoryHome()+File.separator+CLIENT_CONTRIB_SUBDIR;
-		libContribHome = getRepositoryHome()+File.separator+LIB_CONTRIB_SUBDIR;
-		ejbContribHome = getRepositoryHome()+File.separator+EJB_CONTRIB_SUBDIR;
-		contribFilesHome = getRepositoryHome()+File.separator+CONTRIB_FILES_SUBDIR;
-	}
+  /**
+   * @return the war contributions directory
+   */
+  public static String getWarContribHome() {
+    if (warContribHome == null) {
+      warContribHome = getRepositoryHome() + File.separator
+          + WAR_CONTRIB_SUBDIR;
+    }
+    return warContribHome;
+  }
 
-	/**
-	 * @return the repository directory
-	 */
-	public static String getRepositoryHome() {
-		if (repositoryHome == null) {
-			repositoryHome = getApplicationHome()+File.separator+REPOSITORY_SUBDIR;
-		}
-		return repositoryHome;
-	}
+  /**
+   * @return the client contributions directory
+   */
+  public static String getClientContribHome() {
+    if (clientContribHome == null) {
+      clientContribHome = getRepositoryHome() + File.separator
+          + CLIENT_CONTRIB_SUBDIR;
+    }
+    return clientContribHome;
+  }
 
-	/**
-	 * @return the war contributions directory
-	 */
-	public static String getWarContribHome() {
-		if (warContribHome == null) {
-			warContribHome = getRepositoryHome()+File.separator+WAR_CONTRIB_SUBDIR;
-		}
-		return warContribHome;
-	}
+  /**
+   * @return the library contibutions directory
+   */
+  public static String getLibContribHome() {
+    if (libContribHome == null) {
+      libContribHome = getRepositoryHome() + File.separator
+          + LIB_CONTRIB_SUBDIR;
+    }
+    return libContribHome;
+  }
 
-	/**
-	 * @return the client contributions directory
-	 */
-	public static String getClientContribHome() {
-		if (clientContribHome == null) {
-			clientContribHome = getRepositoryHome()+File.separator+CLIENT_CONTRIB_SUBDIR;
-		}
-		return clientContribHome;
-	}
+  /**
+   * @return the EJB contributions directory
+   */
+  public static String getEjbContribHome() {
+    if (ejbContribHome == null) {
+      ejbContribHome = getRepositoryHome() + File.separator
+          + EJB_CONTRIB_SUBDIR;
+    }
+    return ejbContribHome;
+  }
 
-	/**
-	 * @return the library contibutions directory
-	 */
-	public static String getLibContribHome() {
-		if (libContribHome == null) {
-			libContribHome = getRepositoryHome()+File.separator+LIB_CONTRIB_SUBDIR;
-		}
-		return libContribHome;
-	}
-
-	/**
-	 * @return the EJB contributions directory
-	 */
-	public static String getEjbContribHome() {
-		if (ejbContribHome == null) {
-			ejbContribHome = getRepositoryHome()+File.separator+EJB_CONTRIB_SUBDIR;
-		}
-		return ejbContribHome;
-	}
-
-	/**
-	 * @return the contribution XML files directory
-	 */
-	public static String getContribFilesHome() {
-		if (contribFilesHome == null) {
-			contribFilesHome = getRepositoryHome()+File.separator+CONTRIB_FILES_SUBDIR;
-		}
-		return contribFilesHome;
-	}
+  /**
+   * @return the contribution XML files directory
+   */
+  public static String getContribFilesHome() {
+    if (contribFilesHome == null) {
+      contribFilesHome = getRepositoryHome() + File.separator
+          + CONTRIB_FILES_SUBDIR;
+    }
+    return contribFilesHome;
+  }
 
 }

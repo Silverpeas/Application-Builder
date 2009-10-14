@@ -32,10 +32,9 @@ import org.jdom.Element;
 import org.jdom.filter.ElementFilter;
 
 /**
- * Titre :        Application Builder
- * Description :
- * Copyright :    Copyright (c) 2001
- * Société :      Stratélia
+ * Titre : Application Builder Description : Copyright : Copyright (c) 2001
+ * Société : Stratélia
+ * 
  * @author Jean-Christophe Carry
  * @version 2.0
  */
@@ -54,14 +53,13 @@ public class XmlTreeHandler {
    */
   public static final char MODE_DELETE = 'D';
   /**
-   * If the named node exists, it is accessed
-   * If the named node does not exist, it is created
+   * If the named node exists, it is accessed If the named node does not exist,
+   * it is created
    */
   public static final char MODE_UPDATE = 'U';
   /**
-   * Every named node accessed becomes unique
-   * If it exists, the others ones are deleted
-   * If it does not exist, it is created
+   * Every named node accessed becomes unique If it exists, the others ones are
+   * deleted If it does not exist, it is created
    */
   public static final char MODE_UNIQUE = '1';
 
@@ -100,6 +98,7 @@ public class XmlTreeHandler {
   public Element getStartingElement() {
     return _startingElement;
   }
+
   private Element _startingElement = null;
   private char _mode;
 
@@ -121,6 +120,7 @@ public class XmlTreeHandler {
       setName(null);
     }
   }
+
   private String _name = null;
 
   // ###################################
@@ -141,6 +141,7 @@ public class XmlTreeHandler {
       setElement(null);
     }
   }
+
   private Element _element = null;
 
   // ###################################
@@ -161,6 +162,7 @@ public class XmlTreeHandler {
       _iElements = null;
     }
   }
+
   private Iterator _iElements = null;
 
   // ###################################
@@ -192,14 +194,12 @@ public class XmlTreeHandler {
         case MODE_SELECT:
           if (getIElements().hasNext()) {
             setElement((Element) getIElements().next());
-          }
-          else {
+          } else {
             eraseAll();
           }
           break;
       }
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
@@ -208,13 +208,11 @@ public class XmlTreeHandler {
     if (hasElement()) {
       if (getElement().isRootElement()) {
         eraseIElements();
-      }
-      else {
+      } else {
         List children = null;
         if (hasName()) {
           children = getElement().getParentElement().getChildren(getName());
-        }
-        else {
+        } else {
           children = getElement().getParentElement().getChildren();
         }
         setIElements(children.iterator());
@@ -242,6 +240,7 @@ public class XmlTreeHandler {
       setAttribute(null);
     }
   }
+
   private Attribute _attribute = null;
 
   // ###################################
@@ -260,6 +259,7 @@ public class XmlTreeHandler {
   private boolean hasCousinsAncestor() {
     return _cousinsAncestor != null;
   }
+
   private Element _cousinsAncestor = null;
 
   // ###################################
@@ -288,17 +288,16 @@ public class XmlTreeHandler {
   private void setElementCousinsAncestor() {
     if (hasElement()) {
       setCousinsAncestor(getElement());
-    }
-    else {
+    } else {
       eraseCousinsAncestor();
     }
   }
 
   private void setParentCousinsAncestor() {
-    if (hasElement() && hasParent() && !getElement().getParentElement().isRootElement()) {
+    if (hasElement() && hasParent()
+        && !getElement().getParentElement().isRootElement()) {
       setCousinsAncestor(getElement().getParentElement());
-    }
-    else {
+    } else {
       eraseCousinsAncestor();
     }
   }
@@ -398,8 +397,7 @@ public class XmlTreeHandler {
     if (hasElement()) {
       _startingElement = getElement();
       setCurrentElementAsCousinsAncestor();
-    }
-    else {
+    } else {
       eraseAll();
       _startingElement = null;
     }
@@ -426,8 +424,7 @@ public class XmlTreeHandler {
       }
       setElement(getCurrentElement().getParentElement());
       syncIElementsWithElementAndName();
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
@@ -469,8 +466,7 @@ public class XmlTreeHandler {
                 Element e = (Element) i.next();
                 if (passedFirst) {
                   getCurrentElement().removeContent(e);
-                }
-                else {
+                } else {
                   passedFirst = true;
                 }
               }
@@ -492,8 +488,7 @@ public class XmlTreeHandler {
           children.clear();
           break;
       }
-    }
-    else {
+    } else {
       children = getCurrentElement().getChildren();
     }
     if (children.isEmpty()) {
@@ -506,8 +501,7 @@ public class XmlTreeHandler {
     List children = getNamedChildren();
     if (children == null) {
       eraseAll();
-    }
-    else {
+    } else {
       setElement((Element) children.iterator().next());
       syncIElementsWithElementAndName();
     }
@@ -563,18 +557,17 @@ public class XmlTreeHandler {
       }
       if (a == null) {
         eraseAll();
-      }
-      else {
+      } else {
         eraseName();
         eraseIElements();
         eraseElement();
         setAttribute(a);
       }
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
+
   // ###################################
   public static final char TYPE_ATTRIBUTE = 'A';
   public static final char TYPE_ELEMENT = 'E';
@@ -596,8 +589,7 @@ public class XmlTreeHandler {
   public void gotoNextSiblingNode() {
     if (isElement()) {
       gotoNextSibling();
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
@@ -613,19 +605,13 @@ public class XmlTreeHandler {
     return found;
   }
 
-  //#####################################
+  // #####################################
   public void pushState() {
     if (_stateStack == null) {
       _stateStack = new LinkedList();
     }
-    _stateStack.addFirst(
-        new Object[]{
-          getAttribute(),
-          getElement(),
-          getName(),
-          getStartingElement(),
-          getCousinsAncestor()
-        });
+    _stateStack.addFirst(new Object[] { getAttribute(), getElement(),
+        getName(), getStartingElement(), getCousinsAncestor() });
   }
 
   public void popState() {
@@ -657,6 +643,7 @@ public class XmlTreeHandler {
       pushState();
     }
   }
+
   private LinkedList _stateStack = null;
 
   // ######### Search ##########
@@ -678,7 +665,7 @@ public class XmlTreeHandler {
             setMode(MODE_UPDATE);
             break;
           }
-        // if no next, INSERT
+          // if no next, INSERT
         case MODE_INSERT:
           char bakMode = getMode();
           // from UPDATE mode, there is no next
@@ -698,14 +685,11 @@ public class XmlTreeHandler {
         case MODE_SELECT:
           if (!isElement() || isCurrentElementRoot() || !hasName()) {
             eraseAll();
-          }
-          else if (hasNextSibling()) {
+          } else if (hasNextSibling()) {
             gotoNextSibling();
-          }
-          else if (isParentCousinsAncestor()) {
+          } else if (isParentCousinsAncestor()) {
             eraseAll();
-          }
-          else {
+          } else {
             boolean changeCousinsAncestor = isElementCousinsAncestor();
             String cousinName = getName();
             setElement(getElement().getParentElement());
@@ -717,22 +701,20 @@ public class XmlTreeHandler {
               if (hasElement() && changeCousinsAncestor) {
                 setCousinsAncestor(getElement());
               }
-            }
-            else {
+            } else {
               eraseAll();
             }
           }
           break;
       }
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
 
   /**
    * @return true if another element exists with the same path (same name and
-   * ancestors with same names) in the document
+   *         ancestors with same names) in the document
    */
   public boolean hasNextCousin() {
     boolean found;
@@ -744,8 +726,7 @@ public class XmlTreeHandler {
       setMode(bakMode);
       found = currentNodeExists();
       popState();
-    }
-    else {
+    } else {
       found = false;
     }
     return found;
@@ -753,7 +734,7 @@ public class XmlTreeHandler {
 
   /**
    * @return true if the current element is parent of the subnode of the given
-   * type, name and value.
+   *         type, name and value.
    */
   public boolean isParentOf(char nodeType, String nodeName, String nodeValue) {
     boolean found = false;
@@ -793,7 +774,7 @@ public class XmlTreeHandler {
 
   /**
    * @return true if the current element is parent of the subnode of the given
-   * type and name.
+   *         type and name.
    */
   public boolean isParentOf(char nodeType, String nodeName) {
     return isParentOf(nodeType, nodeName, null);
@@ -813,15 +794,15 @@ public class XmlTreeHandler {
         setMode(bakMode);
       }
       gotoFirstChildNode(nodeType, nodeName);
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
 
   /**
    */
-  public void gotoFirstNephewParentOf(String nephewName, char nodeType, String nodeName, String nodeValue) {
+  public void gotoFirstNephewParentOf(String nephewName, char nodeType,
+      String nodeName, String nodeValue) {
     if (hasElement()) {
       boolean found;
       boolean nephewExists;
@@ -840,8 +821,7 @@ public class XmlTreeHandler {
             found = isParentOf(nodeType, nodeName, nodeValue);
           }
         }
-      }
-      else {
+      } else {
         found = false;
       }
       setMode(bakMode);
@@ -859,8 +839,7 @@ public class XmlTreeHandler {
         case MODE_UNIQUE:
           if (!nephewExists) {
             gotoFirstChild(nephewName);
-          }
-          else {
+          } else {
             if (!found) {
               setMode(MODE_SELECT);
               while (hasNextSiblingNode()) {
@@ -921,21 +900,22 @@ public class XmlTreeHandler {
           popState();
           break;
       }
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
 
-  public void gotoFirstNephewParentOf(String nephewName, char nodeType, String nodeName) {
+  public void gotoFirstNephewParentOf(String nephewName, char nodeType,
+      String nodeName) {
     gotoFirstNephewParentOf(nephewName, nodeType, null);
   }
 
   /**
-   * finds and goes to the first cousin
-   * which has a subnode of the given type, name and value.
+   * finds and goes to the first cousin which has a subnode of the given type,
+   * name and value.
    */
-  public void gotoNextCousinParentOf(char nodeType, String nodeName, String nodeValue) {
+  public void gotoNextCousinParentOf(char nodeType, String nodeName,
+      String nodeValue) {
     if (hasElement() && hasName()) {
       char bakMode = getMode();
       setMode(MODE_SELECT);
@@ -1002,8 +982,7 @@ public class XmlTreeHandler {
           popState();
           break;
       }
-    }
-    else {
+    } else {
       eraseAll();
     }
   }
@@ -1016,7 +995,8 @@ public class XmlTreeHandler {
    * finds and goes to the first cousin which has a subnode of the given type,
    * name and value.
    */
-  public boolean hasNextCousinParentOf(char nodeType, String nodeName, String nodeValue) {
+  public boolean hasNextCousinParentOf(char nodeType, String nodeName,
+      String nodeValue) {
     boolean found;
     if (hasElement()) {
       pushState();
@@ -1026,8 +1006,7 @@ public class XmlTreeHandler {
       setMode(bakMode);
       found = currentNodeExists();
       popState();
-    }
-    else {
+    } else {
       found = false;
     }
     return found;
