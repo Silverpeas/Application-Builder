@@ -21,7 +21,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\Repository.java
 
 package com.silverpeas.applicationbuilder;
 
@@ -34,8 +33,8 @@ import java.util.List;
 import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
- * @todo vérifier l'existence des répertoires attendus avant de laisser planter
- *       X fois pour les fichiers que l'on cherche dedans
+ * @todo vÃ©rifier l'existence des rÃ©pertoires attendus avant de laisser
+ *       planter X fois pour les fichiers que l'on cherche dedans
  */
 public class Repository {
 

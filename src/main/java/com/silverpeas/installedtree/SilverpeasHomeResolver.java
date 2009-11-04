@@ -23,13 +23,6 @@
  */
 package com.silverpeas.installedtree;
 
-/**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 2.0
- */
 public class SilverpeasHomeResolver {
 
   private static final String HOME_KEY = "silverpeas.home";

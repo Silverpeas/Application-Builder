@@ -25,14 +25,6 @@ package com.silverpeas.xml.xpath;
 
 import java.util.Arrays;
 
-/**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 2.0
- */
-
 public class XPathParseException extends Exception {
 
   private Integer _errorIndex = null;
@@ -63,6 +55,7 @@ public class XPathParseException extends Exception {
     return _indexedErrorMsg;
   }
 
+  @Override
   public String getMessage() {
     String msg = "";
     if (super.getMessage() != null) {

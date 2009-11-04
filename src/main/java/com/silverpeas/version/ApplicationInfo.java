@@ -36,7 +36,7 @@ import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
  * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
+ * SociÃ©tÃ© : StratÃ©lia
  * 
  * @author Jean-Christophe Carry
  * @version 1.0
@@ -50,8 +50,8 @@ public class ApplicationInfo {
   private static final String busVersionName = "applicativeBus";
 
   /**
-   * Classe implémentant l'interface java.io.FilenameFilter et permettant de
-   * récupérer la liste des fichiers correspondant au masque
+   * Classe implÃ©mentant l'interface java.io.FilenameFilter et permettant de
+   * rÃ©cupÃ©rer la liste des fichiers correspondant au masque
    */
   private static class VersionFilter implements FilenameFilter {
     public VersionFilter() {

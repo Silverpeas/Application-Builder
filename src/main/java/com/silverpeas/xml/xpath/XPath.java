@@ -39,11 +39,6 @@ import com.silverpeas.xml.XmlTreeHandler;
  * (S)[15] PrimaryExpr ::= Literal | Number<br/>
  * Restriction : when a predicate is used, only the first matching element is
  * selected.<br/>
- * Copyright : Copyright (c) 2001<br/>
- * Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 1.0
  */
 
 public class XPath {

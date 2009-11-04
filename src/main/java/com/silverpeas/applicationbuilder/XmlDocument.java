@@ -39,7 +39,6 @@ import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -143,9 +142,9 @@ public class XmlDocument extends ApplicationBuilderItem {
    * @roseuid 3AAF4099035F
    */
   public void loadFrom(InputStream xmlStream) throws AppBuilderException {
-    // Attention à la configuration HTTP ! (Proxy : sys. props.
+    // Attention a la configuration HTTP ! (Proxy : sys. props.
     // "http.proxy[Host|Port])
-    // pour accès au DOCTYPE
+    // pour acces au DOCTYPE
     try {
       SAXBuilder builder = new SAXBuilder(false);
       underlyingDocument = builder.build(xmlStream);

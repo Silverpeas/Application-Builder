@@ -32,7 +32,7 @@ import com.silverpeas.xml.XmlTreeHandler;
 
 /**
  * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
+ * SociÃ©tÃ© : StratÃ©lia
  * 
  * @author Jean-Christophe Carry
  * @version 2.0
@@ -540,139 +540,7 @@ public class TestXmlTreeHandler {
     test_UNIQUE_ELEMENT("SSL", true);
     System.out.println("ELEMENT 'LDAPRealm'");
     test_UNIQUE_ELEMENT("LDAPRealm", true);
-    /*
-     * System.out.println();
-     * System.out.println("########################################");
-     * System.out.println("######### SELECT PARENTOF ##############");
-     * System.out.println("########################################");
-     * t.setMode(XmlTreeHandler.MODE_SELECT); System.out.println();
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, false);
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, true);
-     * System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot root"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", false);System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot cousin"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", true);
-     * System.out.println();
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, true);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", true);
-     * 
-     * System.out.println();
-     * System.out.println("########################################");
-     * System.out.println("######### UPDATE PARENTOF ##############");
-     * System.out.println("########################################");
-     * t.setMode(XmlTreeHandler.MODE_UPDATE); System.out.println();
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, false);
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, true);
-     * System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot root"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", false);System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot cousin"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", true);
-     * System.out.println();
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, true);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", true);
-     * 
-     * System.out.println();
-     * System.out.println("########################################");
-     * System.out.println("######### INSERT PARENTOF ##############");
-     * System.out.println("########################################");
-     * t.setMode(XmlTreeHandler.MODE_INSERT); System.out.println();
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, false);
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, true);
-     * System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot root"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", false);System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot cousin"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", true);
-     * System.out.println();
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, true);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", true);
-     * 
-     * System.out.println();
-     * System.out.println("########################################");
-     * System.out.println("######### DELETE PARENTOF ##############");
-     * System.out.println("########################################");
-     * t.setMode(XmlTreeHandler.MODE_DELETE); System.out.println();
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, false);
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, true);
-     * System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot root"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", false);System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot cousin"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", true);
-     * System.out.println();
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, true);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", true);
-     * 
-     * System.out.println();
-     * System.out.println("########################################");
-     * System.out.println("######### UNIQUE PARENTOF ##############");
-     * System.out.println("########################################");
-     * t.setMode(XmlTreeHandler.MODE_UNIQUE); System.out.println();
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, false);
-     * System.out.println("### PARENTOF ATTRIBUTE 'Name' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name", null, true);
-     * System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot root"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", false);System.out.println(
-     * "### PARENTOF ATTRIBUTE 'Name=defaultLDAPRealmForNovellDirectoryServices' pivot cousin"
-     * ); test_PARENTOF(XmlTreeHandler.TYPE_ATTRIBUTE, "Name",
-     * "defaultLDAPRealmForNovellDirectoryServices", true);
-     * System.out.println();
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", null, true);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot root");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", false);
-     * System.out.println("### PARENTOF ELEMENT 'bidon=THREE_3' pivot cousin");
-     * test_PARENTOF(XmlTreeHandler.TYPE_ELEMENT, "bidon", "THREE_3", true);
-     */
-    /*
-*/
+
   }
 
   public static void main(String[] args) throws Exception {

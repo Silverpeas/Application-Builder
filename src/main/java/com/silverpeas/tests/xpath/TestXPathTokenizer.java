@@ -27,7 +27,7 @@ import com.silverpeas.xml.xpath.XPathTokenizer;
 
 /**
  * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
+ * SociÃ©tÃ© : StratÃ©lia
  * 
  * @author Jean-Christophe Carry
  * @version 2.0
@@ -49,15 +49,15 @@ public class TestXPathTokenizer {
     testRead("");
     System.out.println();
     System.out.println("ERREUR sur ','");
-    testRead("w,n!<à'( ç\"éè(néM95BHNDàA3%724 4²<U ");
+    testRead("w,n!<Ã '( Ã§\"Ã©Ã¨(nÃ©M95BHNDÃ A3%724 4Â²<U ");
     System.out.println();
     System.out.println("ERREUR sur car 15 du nom");
-    testRead("nimporte_quoi-ésurtout@tres bizarre");
+    testRead("nimporte_quoi-Ã©surtout@tres bizarre");
     System.out.println();
     System.out.println("ERREUR sur car 27");
     testRead("nimporte_quoi-surtout@tres bizarre");
     System.out.println();
-    System.out.println("ERREUR literaux non fermés");
+    System.out.println("ERREUR literaux non fermÃ©s");
     testRead("'single quoted literal");
     testRead("\"double quoted literal");
     testRead("'");

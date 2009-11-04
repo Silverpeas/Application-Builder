@@ -25,14 +25,6 @@ package com.silverpeas.installedtree;
 
 import java.io.File;
 
-/**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 1.0
- */
-
 public class DirectoryLocator {
   // Sublevel 1
   private static final String PROPERTIES_HOME_SUBDIR = "properties";

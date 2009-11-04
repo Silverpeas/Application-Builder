@@ -34,7 +34,7 @@ import com.silverpeas.version.PackageInfo;
 
 /**
  * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
+ * SociÃ©tÃ© : StratÃ©lia
  * 
  * @author Jean-Christophe Carry
  * @version 1.0
@@ -69,12 +69,12 @@ public class HelpOverviewBuilder extends TemplateBasedBuilder {
 
         tmpStr = getBoxTemplate();
 
-        // on ignore les packages Job'Tools, Job'Lets et Spécifique
+        // on ignore les packages Job'Tools, Job'Lets et SpÃ©cifique
         // car ils n'ont pas d'aide en ligne utilisateur
         String boxName = boxInfo.getName();
         if (!boxName.equalsIgnoreCase("Job'Tools")
             && !boxName.equalsIgnoreCase("Job'Lets")
-            && !boxName.equalsIgnoreCase("Spécifique")) {
+            && !boxName.equalsIgnoreCase("SpÃ©cifique")) {
 
           tmpStr = setTemplateValue(tmpStr, boxSpecialNamePlaceHolder,
               PackageInfo.specialName(boxName));

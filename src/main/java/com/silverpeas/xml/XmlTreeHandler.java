@@ -29,15 +29,7 @@ import java.util.List;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.jdom.filter.ElementFilter;
 
-/**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 2.0
- */
 public class XmlTreeHandler {
 
   /**

@@ -26,21 +26,16 @@ package com.silverpeas.xml.xpath;
 import java.util.Arrays;
 import org.jdom.IllegalNameException;
 
-//import org.apache.xerces.utils.XMLCharacterProperties;
 /**
  * Titre : Application Builder Description : implements a simplified XPath
  * parser that retrieves the different token composing a XPath Tokens are named
- * by the public fields STEP_SEPARATOR ('/') PREDICATE_OPEN ('[')
+ * * by the public fields STEP_SEPARATOR ('/') PREDICATE_OPEN ('[')
  * PREDICATE_CLOSE (']') EQUALITY ('=') DOT ('.' the abreviated step)
  * ABREV_ATTRIBAXIS ('@' the abreviated attribute axis specifier) PARENT_STEP
  * ("..") LITERAL (string enclosed by quotation marks or apostrophes) INTEGER
  * (greater or equal to zero) REAL (greater or equal to zero) NAME (a valid Name
  * as specified in W3C XML 1.0 Recommendation)
  * 
- * Copyright : Copyright (c) 2001 Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 1.0
  */
 public class XPathTokenizer {
 

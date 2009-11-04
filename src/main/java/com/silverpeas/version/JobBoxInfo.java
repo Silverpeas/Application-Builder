@@ -28,14 +28,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 1.0
- */
-
 public class JobBoxInfo implements Comparable {
 
   private static final String busBoxName = "Job'Bus & Job'Manager";
@@ -43,6 +35,7 @@ public class JobBoxInfo implements Comparable {
   private String name = null;
   private Set myPackages = null;
 
+  @Override
   public boolean equals(Object o) {
     if (!(o instanceof JobBoxInfo)) {
       return false;
@@ -50,6 +43,7 @@ public class JobBoxInfo implements Comparable {
     return getName().equalsIgnoreCase(((JobBoxInfo) o).getName());
   }
 
+  @Override
   public int compareTo(Object o) {
     if (!(o instanceof JobBoxInfo)) {
       return -1;

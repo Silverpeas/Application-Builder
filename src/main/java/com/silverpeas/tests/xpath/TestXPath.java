@@ -32,7 +32,7 @@ import com.silverpeas.xml.xpath.XPathParseException;
 
 /**
  * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
+ * SociÃ©tÃ© : StratÃ©lia
  * 
  * @author Jean-Christophe Carry
  * @version 2.0
@@ -53,13 +53,13 @@ public class TestXPath {
     System.out.println();
     System.out.println("# empty path");
     testSyntax("");
-    System.out.println("# é");
-    testSyntax("/Domain/Sérver/@NativeIOEnabled");
-    System.out.println("# mauvais prédicat");
+    System.out.println("# Ã©");
+    testSyntax("/Domain/SÃ©rver/@NativeIOEnabled");
+    System.out.println("# mauvais prÃ©dicat");
     testSyntax("/WAAddressbooks/param[param-name'Home']");
     System.out.println("# &");
     testSyntax("param&value");
-    System.out.println("# litéral mal délimité");
+    System.out.println("# litÃ©ral mal dÃ©limitÃ©");
     testSyntax("./WAAddressbooks[name=\"shmilblick\"]/param[param-name=Home']");
     System.out.println();
     System.out.println("##### RIGHT ONES ######");

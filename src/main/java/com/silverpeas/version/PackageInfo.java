@@ -28,14 +28,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.PropertyResourceBundle;
 
-/**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
- * @author Jean-Christophe Carry
- * @version 1.0
- */
-
 public class PackageInfo implements Comparable {
 
   // expected property names
