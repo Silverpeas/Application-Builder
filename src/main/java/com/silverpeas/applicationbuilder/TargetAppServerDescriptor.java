@@ -32,10 +32,9 @@ import java.util.List;
 import org.jdom.Element;
 
 /**
- * This file is updated before launching the ApplicationBuilder tool to provide
- * the root directory of the target application server. It contains also the
- * name of the class that provides application specific behavior or datas.
- * 
+ * This file is updated before launching the ApplicationBuilder tool to provide the root directory
+ * of the target application server. It contains also the name of the class that provides
+ * application specific behavior or datas.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -44,7 +43,6 @@ public class TargetAppServerDescriptor extends XmlDocument {
 
   /**
    * The name of the XML file that describes one or more application server.
-   * 
    * @since 1.0/B
    */
   private static final String NAME = "targetAppServer.xml";

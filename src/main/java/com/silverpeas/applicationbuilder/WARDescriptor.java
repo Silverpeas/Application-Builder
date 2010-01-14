@@ -31,10 +31,8 @@ import org.jdom.Element;
 import org.jdom.Namespace;
 
 /**
- * this descriptor is created in memory. It is filled with the descriptor parts
- * from the WARParts. Finally, it is integrated in the WAR by the means of a
- * stream.
- * 
+ * this descriptor is created in memory. It is filled with the descriptor parts from the WARParts.
+ * Finally, it is integrated in the WAR by the means of a stream.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -81,8 +79,8 @@ public class WARDescriptor extends XmlDocument {
   }
 
   /**
-   * Theorically, XML contents is not sorted. Actually, this descriptor must be
-   * sorted to work well in an application server.
+   * Theorically, XML contents is not sorted. Actually, this descriptor must be sorted to work well
+   * in an application server.
    */
   public void sort() throws AppBuilderException {
     sort(TAGS_TO_SORT);

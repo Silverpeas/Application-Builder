@@ -33,9 +33,7 @@ import com.silverpeas.version.JobBoxInfo;
 import com.silverpeas.version.PackageInfo;
 
 /**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
+ * Titre : Application Builder Description : Copyright : Copyright (c) 2001 Société : Stratélia
  * @author Jean-Christophe Carry
  * @version 1.0
  */

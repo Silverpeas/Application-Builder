@@ -30,10 +30,8 @@ import java.io.File;
 import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
- * The main class of the ApplicationBuilder tool. Controls the overall sequence
- * of the process. Holds the general information about the installed application
- * structure.
- * 
+ * The main class of the ApplicationBuilder tool. Controls the overall sequence of the process.
+ * Holds the general information about the installed application structure.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -75,7 +73,6 @@ public class ApplicationBuilder {
 
   /**
    * Gets the Repository object
-   * 
    * @return the repository object
    * @since 1.0/B
    * @roseuid 3AAF75C6001A
@@ -86,7 +83,6 @@ public class ApplicationBuilder {
 
   /**
    * Gets the External Repository object
-   * 
    * @return the repository object
    * @since 1.0/B
    * @roseuid 3AAF75C6001A
@@ -111,13 +107,10 @@ public class ApplicationBuilder {
    * @roseuid 3AAFA81703A2
    */
   /*
-   * public Client getClient() {
-   * 
-   * return theClient; }
+   * public Client getClient() { return theClient; }
    */
   /**
    * The unique method that provides the application name
-   * 
    * @roseuid 3AAF9A5300BF
    */
   public static String getApplicationName() {
@@ -153,7 +146,8 @@ public class ApplicationBuilder {
     for (MavenContribution maContrib : lesContributions) {
       // identify the contribution
       Log.add("");
-      Log.add("ADDING \"" + maContrib.getPackageName() + "\" of type \"" + maContrib.getPackageType() + "\"");
+      Log.add("ADDING \"" + maContrib.getPackageName() + "\" of type \"" +
+          maContrib.getPackageType() + "\"");
       // libraries
       if (maContrib.getLibraries() != null) {
         Log.add("merging libraries");
@@ -162,7 +156,7 @@ public class ApplicationBuilder {
       // client
       if (maContrib.getClientPart() != null) {
         Log.add("merging client part");
-        //appBuilder.getClient().mergeClientPart(maContrib.getClientPart());
+        // appBuilder.getClient().mergeClientPart(maContrib.getClientPart());
         appBuilder.getEAR().addLibrary(maContrib.getClientPart());
       }
 
@@ -181,11 +175,13 @@ public class ApplicationBuilder {
 
     if (appBuilder.getExternalRepository() != null) {
       // loop the external contributions
-      MavenContribution[] lesContributionsExternes = appBuilder.getExternalRepository().getContributions();
+      MavenContribution[] lesContributionsExternes =
+          appBuilder.getExternalRepository().getContributions();
       for (MavenContribution maContrib : lesContributionsExternes) {
         // identify the contribution
         Log.add("");
-        Log.add("ADDING \"" + maContrib.getPackageName() + "\" of type \"" + maContrib.getPackageType() + "\"");
+        Log.add("ADDING \"" + maContrib.getPackageName() + "\" of type \"" +
+            maContrib.getPackageType() + "\"");
         // client
         if (maContrib.getClientPart() != null) {
           Log.add("merging client part");
@@ -214,7 +210,8 @@ public class ApplicationBuilder {
     Log.echo("OK : \"" + appBuilder.getEAR().getName() + "\" successfully builded");
     Log.echo("Please find them in \"" + DirectoryLocator.getLibraryHome() + "\"");
     System.out.println(
-        "Full log is available in \"" + DirectoryLocator.getLogHome() + File.separator + Log.getName() + "\"");
+        "Full log is available in \"" + DirectoryLocator.getLogHome() + File.separator +
+        Log.getName() + "\"");
   }
 
   private static void endLoggingWithErrors() {

@@ -37,7 +37,6 @@ import java.util.Set;
 
 /**
  * Convenient class for building archive
- * 
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -55,11 +54,8 @@ public class EARDirectory extends ApplicationBuilderItem {
 
   /**
    * Builder for a write only archive.
-   * 
-   * @param directory
-   *          The absolute path to the directory hosting the archive
-   * @param fileName
-   *          The name of the archive in the file system
+   * @param directory The absolute path to the directory hosting the archive
+   * @param fileName The name of the archive in the file system
    * @since 1.0
    */
   public EARDirectory(File directory, String fileName)
@@ -69,9 +65,7 @@ public class EARDirectory extends ApplicationBuilderItem {
 
   /**
    * Adds an XML file in the archive by the means of streams.
-   * 
-   * @param xmlDoc
-   *          the XML document to add in the archive
+   * @param xmlDoc the XML document to add in the archive
    * @since 1.0
    * @roseuid 3AAF4D630303
    */
@@ -93,11 +87,8 @@ public class EARDirectory extends ApplicationBuilderItem {
   }
 
   /**
-   * Adds an entry to the archive. The entry added is fetched from the file
-   * system
-   * 
-   * @param entry
-   *          the file to add
+   * Adds an entry to the archive. The entry added is fetched from the file system
+   * @param entry the file to add
    * @since 1.0
    * @roseuid 3AAF55F2017D
    */
@@ -115,9 +106,7 @@ public class EARDirectory extends ApplicationBuilderItem {
 
   /**
    * Merges an archive with this archive.
-   * 
-   * @param archive
-   *          the archive to merge
+   * @param archive the archive to merge
    * @since 1.0
    */
   public void mergeWith(ReadOnlyArchive archive) throws AppBuilderException {
@@ -125,14 +114,10 @@ public class EARDirectory extends ApplicationBuilderItem {
   }
 
   /**
-   * Merges an archive with this archive filtering the entries to exclude one of
-   * them.
-   * 
-   * @param archive
-   *          the archive to merge
-   * @param entryToExclude
-   *          the entry to exclude from merge. Contains the archive path of the
-   *          entry to exclude.
+   * Merges an archive with this archive filtering the entries to exclude one of them.
+   * @param archive the archive to merge
+   * @param entryToExclude the entry to exclude from merge. Contains the archive path of the entry
+   * to exclude.
    * @since 1.0
    */
   public void mergeWith(ReadOnlyArchive archive, String entryToExclude)
@@ -143,14 +128,10 @@ public class EARDirectory extends ApplicationBuilderItem {
   }
 
   /**
-   * Merges an archive with this archive filtering the entries to exclude some
-   * of them.
-   * 
-   * @param archive
-   *          the archive to merge
-   * @param entriesToExclude
-   *          the entries to exclude from merge. Contains the archive paths of
-   *          the entries to exclude.
+   * Merges an archive with this archive filtering the entries to exclude some of them.
+   * @param archive the archive to merge
+   * @param entriesToExclude the entries to exclude from merge. Contains the archive paths of the
+   * entries to exclude.
    * @since 1.0
    */
   public void mergeWith(ReadOnlyArchive archive, Set entriesToExclude)
@@ -166,7 +147,7 @@ public class EARDirectory extends ApplicationBuilderItem {
           Log.add(getName()
               + " : already added from \""
               + (String) alreadyAddedFiles
-                  .get(entries[iEntry].getArchivePath()) + "\" : \""
+              .get(entries[iEntry].getArchivePath()) + "\" : \""
               + archive.getName() + "!" + entries[iEntry].getArchivePath()
               + "\" ");
         } else {
@@ -180,7 +161,6 @@ public class EARDirectory extends ApplicationBuilderItem {
 
   /**
    * When all entries have been added, call this method to close the archive
-   * 
    * @roseuid 3AB1EAFE02FD
    */
   public void close(OutputStream out) throws AppBuilderException {
@@ -194,13 +174,10 @@ public class EARDirectory extends ApplicationBuilderItem {
   }
 
   /**
-   * Adds a new entry from a stream. The entry is placed and named according to
-   * the entry. It can be usefull when merging two archives.
-   * 
-   * @param entry
-   *          the description of the new entry
-   * @param in
-   *          the stream carrying the contents of the new entry
+   * Adds a new entry from a stream. The entry is placed and named according to the entry. It can be
+   * usefull when merging two archives.
+   * @param entry the description of the new entry
+   * @param in the stream carrying the contents of the new entry
    * @since 1.0
    * @roseuid 3AB26A5F00FD
    */

@@ -34,10 +34,8 @@ import java.util.GregorianCalendar;
 import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
- * Makes logging available to every class in this package. The static
- * initializer opens the log file and closing is ensured by the "finalize"
- * method of a FileOutputStream.
- * 
+ * Makes logging available to every class in this package. The static initializer opens the log file
+ * and closing is ensured by the "finalize" method of a FileOutputStream.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -46,16 +44,14 @@ public class Log {
 
   /**
    * The name of the log file to generate
-   * 
    * @since 1.0
    */
   private static final String name = "applicationBuilder.log";
 
   /**
-   * The stream to write to. It is obtained from a FileOutputStream based on the
-   * log file. The absolute path to the log file is builded from the name and
-   * the target home asked to the ApplicationBuilder class.
-   * 
+   * The stream to write to. It is obtained from a FileOutputStream based on the log file. The
+   * absolute path to the log file is builded from the name and the target home asked to the
+   * ApplicationBuilder class.
    * @since 1.0
    */
   private static PrintWriter out = null;
@@ -85,8 +81,8 @@ public class Log {
   }
 
   /**
-   * If enabled, any message added to log file is displayed on screen as a dot
-   * ('.') If disabled, messages are only added to log file disabled by default
+   * If enabled, any message added to log file is displayed on screen as a dot ('.') If disabled,
+   * messages are only added to log file disabled by default
    */
   public static void setEchoAsDotEnabled(boolean on) {
     if (echoAsDotEnabled && !on) {
@@ -113,8 +109,7 @@ public class Log {
   }
 
   /**
-   * Adds an AppBuilderException message in the log file with echo to standard
-   * error output
+   * Adds an AppBuilderException message in the log file with echo to standard error output
    */
   public static void echo(AppBuilderException abe) {
     add(abe);
@@ -124,8 +119,7 @@ public class Log {
   }
 
   /**
-   * Adds any Throwable message in the log file with echo to standard error
-   * output
+   * Adds any Throwable message in the log file with echo to standard error output
    */
   public static void echo(Throwable t) {
     add(t);
@@ -136,7 +130,6 @@ public class Log {
 
   /**
    * Adds a line in the log file.
-   * 
    * @since 1.0/B
    * @roseuid 3AB0A0200026
    */
@@ -153,7 +146,6 @@ public class Log {
 
   /**
    * Adds the exception message in the log file
-   * 
    * @since 1.0/B
    * @roseuid 3AB0A0200026
    */
@@ -170,7 +162,6 @@ public class Log {
 
   /**
    * Adds the exception message in the log file
-   * 
    * @since 1.0/B
    * @roseuid 3AB0A0200026
    */

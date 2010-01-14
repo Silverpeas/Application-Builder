@@ -30,9 +30,8 @@ import org.jdom.Document;
 import org.jdom.Element;
 
 /**
- * This descriptor is generated in memory. It is filled with the information and
- * then integrated to the EAR archive by the means of a stream.
- * 
+ * This descriptor is generated in memory. It is filled with the information and then integrated to
+ * the EAR archive by the means of a stream.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -67,9 +66,8 @@ public class AppDescriptor extends XmlDocument {
   }
 
   /**
-   * Adds a "module" tag with nested EJB JAR name within "ejb" tag example :
-   * &lt;module&gt; &lt;ejb&gt;ejb-jar-ic-forums.jar&lt;/ejb&gt; &lt;/module&gt;
-   * 
+   * Adds a "module" tag with nested EJB JAR name within "ejb" tag example : &lt;module&gt;
+   * &lt;ejb&gt;ejb-jar-ic-forums.jar&lt;/ejb&gt; &lt;/module&gt;
    * @since 1.0/B
    * @roseuid 3AAE3C420398
    */
@@ -82,11 +80,8 @@ public class AppDescriptor extends XmlDocument {
   }
 
   /**
-   * Example : &lt;module&gt; &lt;web&gt;
-   * &lt;web-uri&gt;war-ic.war&lt;/web-uri&gt;
-   * &lt;context-root&gt;webactiv&lt;/context-root&gt; &lt;/web&gt;
-   * &lt;/module&gt;
-   * 
+   * Example : &lt;module&gt; &lt;web&gt; &lt;web-uri&gt;war-ic.war&lt;/web-uri&gt;
+   * &lt;context-root&gt;webactiv&lt;/context-root&gt; &lt;/web&gt; &lt;/module&gt;
    * @roseuid 3AAE3CF503E5
    */
   public void setWARInfos(String webUri, String contextRoot) {

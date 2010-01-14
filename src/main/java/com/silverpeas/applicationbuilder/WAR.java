@@ -31,11 +31,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Name = "war-ic.war" Handles the "war-ic.war" archive. The archive file is
- * filled with the added WARParts and finally with the built WARDescriptor. With
- * the help of the java.util.zip or java.util.jar package combined with streams,
- * it must be possible to achieve this goal without uncompressing the archives.
- * 
+ * Name = "war-ic.war" Handles the "war-ic.war" archive. The archive file is filled with the added
+ * WARParts and finally with the built WARDescriptor. With the help of the java.util.zip or
+ * java.util.jar package combined with streams, it must be possible to achieve this goal without
+ * uncompressing the archives.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -43,9 +42,8 @@ import java.util.Set;
 public class WAR extends WARDirectory {
 
   /**
-   * The name of the presentation part archive to build and to integrate to the
-   * application archive (EAR)
-   * 
+   * The name of the presentation part archive to build and to integrate to the application archive
+   * (EAR)
    * @since 1.0/B
    */
   private static final String NAME = "war-ic.war";
@@ -65,11 +63,9 @@ public class WAR extends WARDirectory {
   }
 
   /**
-   * Adds the entries in the WARPart to the WAR. The descriptor entry in the
-   * WARPart is not directly added to the WAR. The WARPart descriptor is added
-   * to the WARDescriptor. When all the WARParts are added, the WARDescriptor
-   * can be added.
-   * 
+   * Adds the entries in the WARPart to the WAR. The descriptor entry in the WARPart is not directly
+   * added to the WAR. The WARPart descriptor is added to the WARDescriptor. When all the WARParts
+   * are added, the WARDescriptor can be added.
    * @roseuid 3AAE3DB80074
    */
   public void mergeWARPart(ReadOnlyArchive warPart) throws AppBuilderException {
@@ -90,7 +86,6 @@ public class WAR extends WARDirectory {
 
   /**
    * When all entries have been added, call this method to close the archive
-   * 
    * @roseuid 3AB1EAFE02FD
    */
   public void close() throws AppBuilderException {

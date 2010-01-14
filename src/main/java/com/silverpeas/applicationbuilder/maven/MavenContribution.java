@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Administrateur
  */
 public class MavenContribution {
@@ -58,7 +57,8 @@ public class MavenContribution {
           warPart = new ReadOnlyArchive(contribution.getParentFile(), contribution.getName());
           break;
         case TYPE_EJB:
-          ejbs.add(new ApplicationBuilderItem(contribution.getParentFile(), contribution.getName()));
+          ejbs
+              .add(new ApplicationBuilderItem(contribution.getParentFile(), contribution.getName()));
           break;
         case TYPE_CLIENT:
           client = new ReadOnlyArchive(contribution.getParentFile(), contribution.getName());
@@ -74,7 +74,6 @@ public class MavenContribution {
 
   /**
    * If no client part is contributed, returns <code>null</code>
-   *
    * @return the client archive
    * @roseuid 3AAE586D01D4
    */

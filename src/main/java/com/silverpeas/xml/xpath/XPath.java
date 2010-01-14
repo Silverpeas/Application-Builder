@@ -28,8 +28,7 @@ import org.jdom.Element;
 import com.silverpeas.xml.XmlTreeHandler;
 
 /**
- * Titre : Application Builder Description : Represents a simplified XPath as
- * specified below.<br/>
+ * Titre : Application Builder Description : Represents a simplified XPath as specified below.<br/>
  * W3C XPath 1.0 Recommendation (S=Simplified)<br/>
  * (S)[1] LocationPath ::= '/' RelativeLocationPath? | RelativeLocationPath<br/>
  * (S)[3] RelativeLocationPath ::= Step ('/' RelativeLocationPath)?<br/>
@@ -37,8 +36,7 @@ import com.silverpeas.xml.XmlTreeHandler;
  * (S)[8] Predicate ::= '[' PredicateExpr ']'<br/>
  * (S)[9] PredicateExpr ::= '@'? NCName '=' PrimaryExpr<br/>
  * (S)[15] PrimaryExpr ::= Literal | Number<br/>
- * Restriction : when a predicate is used, only the first matching element is
- * selected.<br/>
+ * Restriction : when a predicate is used, only the first matching element is selected.<br/>
  */
 
 public class XPath {
@@ -57,10 +55,8 @@ public class XPath {
   }
 
   /**
-   * @param Element
-   *          startingElement the base element where XPath starts
-   * @param String
-   *          xpath the XPath string
+   * @param Element startingElement the base element where XPath starts
+   * @param String xpath the XPath string
    * @param char mode a static XmlTreeHandler constant
    */
   public XPath(Element startingElement, String xpath, char mode) {
@@ -93,7 +89,6 @@ public class XPath {
 
   /**
    * Use the constants defined in XmlTreeHandler
-   * 
    * @see com.silverpeas.xml.XmlTreeHandler
    */
   public void setMode(char mode) {
@@ -177,8 +172,8 @@ public class XPath {
   }
 
   /**
-   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[1] LocationPath ::= '/'
-   * RelativeLocationPath? | RelativeLocationPath
+   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[1] LocationPath ::= '/' RelativeLocationPath? |
+   * RelativeLocationPath
    */
   private void LocationPath() throws XPathParseException {
     if (getTokenizer().getCurrentTokenType() == XPathTokenizer.STEP_SEPARATOR) {
@@ -199,8 +194,8 @@ public class XPath {
   }
 
   /**
-   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[3] RelativeLocationPath ::=
-   * Step ('/' RelativeLocationPath)?
+   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[3] RelativeLocationPath ::= Step ('/'
+   * RelativeLocationPath)?
    */
   private void RelativeLocationPath() throws XPathParseException {
     Step();
@@ -211,8 +206,8 @@ public class XPath {
   }
 
   /**
-   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[4] Step ::= '.' | '..' |
-   * '@' NCName | NCName Predicate?
+   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[4] Step ::= '.' | '..' | '@' NCName | NCName
+   * Predicate?
    */
   private void Step() throws XPathParseException {
     switch (getTokenizer().getCurrentTokenType()) {
@@ -268,8 +263,7 @@ public class XPath {
   }
 
   /**
-   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[8] Predicate ::= '['
-   * PredicateExpr ']'
+   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[8] Predicate ::= '[' PredicateExpr ']'
    */
   private void Predicate(String elementName) throws XPathParseException {
     if (getTokenizer().getCurrentTokenType() != XPathTokenizer.PREDICATE_OPEN) {
@@ -289,8 +283,8 @@ public class XPath {
   }
 
   /**
-   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[9] PredicateExpr ::= '@'?
-   * NCName '=' PrimaryExpr
+   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[9] PredicateExpr ::= '@'? NCName '='
+   * PrimaryExpr
    */
   private void PredicateExpr(String elementName) throws XPathParseException {
     char nodeType = 'X';
@@ -328,8 +322,7 @@ public class XPath {
   }
 
   /**
-   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[15] PrimaryExpr ::= Literal
-   * | Number
+   * W3C XPath 1.0 Recommendation (S=Simplified) (S)[15] PrimaryExpr ::= Literal | Number
    */
   private String PrimaryExpr() throws XPathParseException {
     String value = null;
@@ -390,8 +383,8 @@ public class XPath {
   // ######### does it exist in the XML document ##########
 
   /**
-   * @return null if not parsed or if no starting element is available. True if
-   *         the XPath points to an existing node
+   * @return null if not parsed or if no starting element is available. True if the XPath points to
+   * an existing node
    */
   public Boolean exists() {
     return _exists;

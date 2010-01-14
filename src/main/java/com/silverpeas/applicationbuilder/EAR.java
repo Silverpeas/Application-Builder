@@ -28,9 +28,8 @@ import java.io.File;
 import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
- * This class dispatches the contributions parts in the target structures and
- * then creates the archive.
- * 
+ * This class dispatches the contributions parts in the target structures and then creates the
+ * archive.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -39,7 +38,6 @@ public class EAR extends EARDirectory {
 
   /**
    * The name of the application archive to build
-   * 
    * @since 1.0/B
    */
   private static final String NAME = "silverpeas.ear";
@@ -78,7 +76,6 @@ public class EAR extends EARDirectory {
 
   /**
    * When all entries have been added, call this method to close the archive
-   * 
    * @roseuid 3AB1EAFE02FD
    */
   public void close() throws AppBuilderException {
@@ -102,7 +99,6 @@ public class EAR extends EARDirectory {
 
   /**
    * Adds a set of EJBs and updates the application descriptor
-   * 
    * @roseuid 3AAFC08C01E2
    */
   public void addEJBs(ApplicationBuilderItem[] srcEjbs)

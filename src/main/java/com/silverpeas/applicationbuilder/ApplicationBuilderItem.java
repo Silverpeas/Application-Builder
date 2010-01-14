@@ -35,41 +35,34 @@ import java.io.File;
 public class ApplicationBuilderItem {
 
   /**
-   * The name of the item. It can be the name of a file or the name of an
-   * archive entry.
-   * 
+   * The name of the item. It can be the name of a file or the name of an archive entry.
    * @since 1.0
    */
   private String name = null;
 
   /**
-   * The location of the item in an archive. examples : "library" for JAR
-   * libraries, "WEB-INF" for a descriptor.
-   * 
+   * The location of the item in an archive. examples : "library" for JAR libraries, "WEB-INF" for a
+   * descriptor.
    * @since 1.0
    */
   private String location = null;
 
   /**
-   * Used for a file item. The absolute path of a directory in the file system
-   * hosting the file.
-   * 
+   * Used for a file item. The absolute path of a directory in the file system hosting the file.
    * @since 1.0
    */
   private File home = null;
 
   /**
-   * A convenience attribute built as needed from attributes "home" and "name".
-   * The absolute path to the file item in the file system.
-   * 
+   * A convenience attribute built as needed from attributes "home" and "name". The absolute path to
+   * the file item in the file system.
    * @since 1.0
    */
   private File path = null;
 
   /**
-   * A convenience attribute built as needed from attributes "location" and
-   * "name". The path to the item in an archive
-   * 
+   * A convenience attribute built as needed from attributes "location" and "name". The path to the
+   * item in an archive
    * @since 1.0
    */
   private String archivePath = null;
@@ -81,11 +74,8 @@ public class ApplicationBuilderItem {
 
   /**
    * This builder is for an Archive Item.
-   * 
-   * @param directory
-   *          the name of a directory in an archive hosting the item.
-   * @param itemName
-   *          the name of the item
+   * @param directory the name of a directory in an archive hosting the item.
+   * @param itemName the name of the item
    * @since 1.0
    */
   public ApplicationBuilderItem(String directory, String itemName) {
@@ -95,11 +85,8 @@ public class ApplicationBuilderItem {
 
   /**
    * This constructor is for a file item.
-   * 
-   * @param directory
-   *          the absolute path to the directory
-   * @param itemName
-   *          the name of the file and only the name (no directory).
+   * @param directory the absolute path to the directory
+   * @param itemName the name of the file and only the name (no directory).
    * @since 1.0
    */
   public ApplicationBuilderItem(File directory, String itemName) {
@@ -109,9 +96,7 @@ public class ApplicationBuilderItem {
 
   /**
    * Setter for "home" attribute.
-   * 
-   * @param directory
-   *          the absolute path to the directory hosting the file
+   * @param directory the absolute path to the directory hosting the file
    * @since 1.0
    * @roseuid 3AB2196D0273
    */
@@ -126,9 +111,7 @@ public class ApplicationBuilderItem {
 
   /**
    * Sets the name of the item.
-   * 
-   * @param itemName
-   *          the name of the item
+   * @param itemName the name of the item
    * @since 1.0
    * @roseuid 3AB219E00319
    */
@@ -144,7 +127,6 @@ public class ApplicationBuilderItem {
 
   /**
    * Gets the name of the item
-   * 
    * @return the name of the item
    * @since 1.0
    * @roseuid 3AB21BA80089
@@ -155,9 +137,7 @@ public class ApplicationBuilderItem {
 
   /**
    * Sets the location of the item in an archive
-   * 
-   * @param directory
-   *          the name of a directory in an archive hosting the item.
+   * @param directory the name of a directory in an archive hosting the item.
    * @since 1.0
    * @roseuid 3AB21C4500C1
    */
@@ -183,7 +163,6 @@ public class ApplicationBuilderItem {
 
   /**
    * Gets the absolute path to the item in the file system
-   * 
    * @return the absolute path to the item in the file system
    * @since 1.0
    * @roseuid 3AB2214F0076
@@ -194,7 +173,6 @@ public class ApplicationBuilderItem {
 
   /**
    * Gets the path to the item in an archive
-   * 
    * @return the path to the item in an archive
    * @since 1.0
    */
@@ -204,7 +182,6 @@ public class ApplicationBuilderItem {
 
   /**
    * Gets the size of the item
-   * 
    * @return the size of the item, <code>-1</code> if unknown.
    */
   public long getSize() {
@@ -223,7 +200,6 @@ public class ApplicationBuilderItem {
 
   /**
    * Updates the "path" field
-   * 
    * @see com.silverpeas.applicationbuilder.ApplicationBuilderItem#setName
    * @see com.silverpeas.applicationbuilder.ApplicationBuilderItem#setHome
    */
@@ -235,7 +211,6 @@ public class ApplicationBuilderItem {
 
   /**
    * Updates the "archivePath" field
-   * 
    * @see com.silverpeas.applicationbuilder.ApplicationBuilderItem#setName
    * @see com.silverpeas.applicationbuilder.ApplicationBuilderItem#setLocation
    */

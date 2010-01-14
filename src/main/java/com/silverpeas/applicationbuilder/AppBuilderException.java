@@ -28,10 +28,8 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 
 /**
- * Makes logging available to every class in this package. The static
- * initializer opens the log file and closing is ensured by the "finalize"
- * method of a FileOutputStream.
- * 
+ * Makes logging available to every class in this package. The static initializer opens the log file
+ * and closing is ensured by the "finalize" method of a FileOutputStream.
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B

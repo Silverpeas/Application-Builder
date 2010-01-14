@@ -30,7 +30,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
  * @author Administrateur
  */
 public class MavenRepository {
@@ -51,14 +50,15 @@ public class MavenRepository {
   protected void loadClients() throws AppBuilderException {
     File[] archives = listArchivesInDirectory(DirectoryLocator.getClientContribHome());
     for (File archive : archives) {
-      contributions.add(new MavenContribution(new File[]{archive}, MavenContribution.TYPE_CLIENT));
+      contributions
+          .add(new MavenContribution(new File[] { archive }, MavenContribution.TYPE_CLIENT));
     }
   }
 
   protected void loadWarParts() throws AppBuilderException {
     File[] archives = listArchivesInDirectory(DirectoryLocator.getWarContribHome());
     for (File archive : archives) {
-      contributions.add(new MavenContribution(new File[]{archive}, MavenContribution.TYPE_WAR));
+      contributions.add(new MavenContribution(new File[] { archive }, MavenContribution.TYPE_WAR));
     }
   }
 

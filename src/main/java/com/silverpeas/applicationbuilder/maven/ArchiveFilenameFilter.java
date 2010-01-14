@@ -28,7 +28,6 @@ import java.io.FilenameFilter;
 import java.util.regex.Pattern;
 
 /**
- *
  * @author Administrateur
  */
 public class ArchiveFilenameFilter implements FilenameFilter {

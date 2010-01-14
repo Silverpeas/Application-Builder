@@ -36,9 +36,7 @@ import com.silverpeas.version.JobBoxInfo;
 import com.silverpeas.version.PackageInfo;
 
 /**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
+ * Titre : Application Builder Description : Copyright : Copyright (c) 2001 Société : Stratélia
  * @author Jean-Christophe Carry
  * @version 1.0
  */
@@ -94,8 +92,8 @@ public class OneSuiteIndexBuilder extends TemplateBasedBuilder {
         Reader srcText = new StringReader(targetFileContents);
         FileWriter out = new FileWriter(new File(
             DirectoryLocator.getHelpHome(), PackageInfo.specialName(boxInfo
-                .getName())
-                + "-" + suiteName));
+            .getName())
+            + "-" + suiteName));
         int charsRead;
         while ((charsRead = srcText.read(data, 0, BUFSIZE)) > 0) {
           out.write(data, 0, charsRead);

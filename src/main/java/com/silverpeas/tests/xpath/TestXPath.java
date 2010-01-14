@@ -31,9 +31,7 @@ import com.silverpeas.xml.xpath.XPath;
 import com.silverpeas.xml.xpath.XPathParseException;
 
 /**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
+ * Titre : Application Builder Description : Copyright : Copyright (c) 2001 Société : Stratélia
  * @author Jean-Christophe Carry
  * @version 2.0
  */

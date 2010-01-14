@@ -45,13 +45,12 @@ public class XmlTreeHandler {
    */
   public static final char MODE_DELETE = 'D';
   /**
-   * If the named node exists, it is accessed If the named node does not exist,
-   * it is created
+   * If the named node exists, it is accessed If the named node does not exist, it is created
    */
   public static final char MODE_UPDATE = 'U';
   /**
-   * Every named node accessed becomes unique If it exists, the others ones are
-   * deleted If it does not exist, it is created
+   * Every named node accessed becomes unique If it exists, the others ones are deleted If it does
+   * not exist, it is created
    */
   public static final char MODE_UNIQUE = '1';
 
@@ -644,8 +643,7 @@ public class XmlTreeHandler {
   }
 
   /**
-   * move to the next element with the same name and with ancestors with the
-   * same names
+   * move to the next element with the same name and with ancestors with the same names
    */
   public void gotoNextCousin() {
     if (hasElement() && hasName()) {
@@ -705,8 +703,8 @@ public class XmlTreeHandler {
   }
 
   /**
-   * @return true if another element exists with the same path (same name and
-   *         ancestors with same names) in the document
+   * @return true if another element exists with the same path (same name and ancestors with same
+   * names) in the document
    */
   public boolean hasNextCousin() {
     boolean found;
@@ -725,8 +723,7 @@ public class XmlTreeHandler {
   }
 
   /**
-   * @return true if the current element is parent of the subnode of the given
-   *         type, name and value.
+   * @return true if the current element is parent of the subnode of the given type, name and value.
    */
   public boolean isParentOf(char nodeType, String nodeName, String nodeValue) {
     boolean found = false;
@@ -765,8 +762,7 @@ public class XmlTreeHandler {
   }
 
   /**
-   * @return true if the current element is parent of the subnode of the given
-   *         type and name.
+   * @return true if the current element is parent of the subnode of the given type and name.
    */
   public boolean isParentOf(char nodeType, String nodeName) {
     return isParentOf(nodeType, nodeName, null);
@@ -903,8 +899,7 @@ public class XmlTreeHandler {
   }
 
   /**
-   * finds and goes to the first cousin which has a subnode of the given type,
-   * name and value.
+   * finds and goes to the first cousin which has a subnode of the given type, name and value.
    */
   public void gotoNextCousinParentOf(char nodeType, String nodeName,
       String nodeValue) {
@@ -984,8 +979,7 @@ public class XmlTreeHandler {
   }
 
   /**
-   * finds and goes to the first cousin which has a subnode of the given type,
-   * name and value.
+   * finds and goes to the first cousin which has a subnode of the given type, name and value.
    */
   public boolean hasNextCousinParentOf(char nodeType, String nodeName,
       String nodeValue) {

@@ -33,14 +33,14 @@ import java.util.List;
 import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
- * @todo vérifier l'existence des répertoires attendus avant de laisser
- *       planter X fois pour les fichiers que l'on cherche dedans
+ * @todo vérifier l'existence des répertoires attendus avant de laisser planter X fois pour les
+ * fichiers que l'on cherche dedans
  */
 public class Repository {
 
   /**
-   * Classe implémentant l'interface java.io.FilenameFilter et permettant de
-   * récupérer la liste des fichiers correspondant au masque
+   * Classe implémentant l'interface java.io.FilenameFilter et permettant de récupérer la liste des
+   * fichiers correspondant au masque
    */
   private class ContributionFilter implements FilenameFilter {
     private String contributionFileSuffix = "-contribution.xml";
@@ -63,8 +63,8 @@ public class Repository {
   }
 
   /**
-   * @roseuid 3AAF977E0370 Renvoie un tableau pour chaque fichier de
-   *          contribution présent ds le répertoire "repository\data".
+   * @roseuid 3AAF977E0370 Renvoie un tableau pour chaque fichier de contribution présent ds le
+   * répertoire "repository\data".
    */
   public Contribution[] getContributions() {
     return theContributions;

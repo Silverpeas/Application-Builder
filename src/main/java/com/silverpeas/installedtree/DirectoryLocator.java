@@ -75,8 +75,8 @@ public class DirectoryLocator {
   }
 
   /**
-   * @return the root directory of Silverpeas installed tree. the parent of
-   *         'bin', 'properties', etc.
+   * @return the root directory of Silverpeas installed tree. the parent of 'bin', 'properties',
+   * etc.
    */
   static public String getApplicationHome() {
     if (applicationHome == null) {
@@ -97,8 +97,7 @@ public class DirectoryLocator {
   }
 
   /**
-   * @return a map of the help paths (String) indexed by the locales("fr", "en",
-   *         "de", ...)
+   * @return a map of the help paths (String) indexed by the locales("fr", "en", "de", ...)
    */
   public static String getHelpHome() {
     if (helpHome == null) {

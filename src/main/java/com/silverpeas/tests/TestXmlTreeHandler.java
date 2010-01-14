@@ -31,9 +31,7 @@ import com.silverpeas.applicationbuilder.XmlDocument;
 import com.silverpeas.xml.XmlTreeHandler;
 
 /**
- * Titre : Application Builder Description : Copyright : Copyright (c) 2001
- * Société : Stratélia
- * 
+ * Titre : Application Builder Description : Copyright : Copyright (c) 2001 Société : Stratélia
  * @author Jean-Christophe Carry
  * @version 2.0
  */
@@ -360,45 +358,35 @@ public class TestXmlTreeHandler {
   }
 
   /*
-   * private void test_PARENTOF(char nodeType, String nodeName, String
-   * nodeValue, boolean pivotCousin) throws Exception { doc = new
-   * XmlDocument(new File("XML4tests"),"config4parentof.xml"); doc.load();
-   * t.setStartingElement(doc.getDocument().getRootElement()); char
-   * bakMode=t.getMode(); t.setMode(XmlTreeHandler.MODE_SELECT);
-   * System.out.println("START"); t.gotoFirstChild("cousin"); if (pivotCousin) {
-   * t.setCurrentElementAsCousinsAncestor(); }
-   * System.out.println("\t"+t.getCurrentElement());
-   * t.gotoFirstChild("brother");
-   * System.out.println("\t\t"+t.getCurrentElement());
-   * t.gotoFirstChild("LDAPRealm");
-   * System.out.print("\t\t\t"+t.getCurrentElement()+" : "); t.setMode(bakMode);
-   * t.pushState(); t.setMode(XmlTreeHandler.MODE_SELECT);
-   * t.gotoFirstChildNode(nodeType, nodeName);
-   * System.out.println(t.getCurrentNode()); t.setMode(bakMode); t.popState();
-   * if (pivotCousin) { System.out.println("pivot : cousin"); } else {
-   * System.out.println("pivot : root"); } t.setMode(bakMode);
-   * t.gotoSelfOrCousinParentOf(nodeType, nodeName, nodeValue); t.pushState();
-   * t.setMode(XmlTreeHandler.MODE_SELECT); t.gotoFirstChildNode(nodeType,
-   * nodeName); System.out.println(t.getCurrentNode()); t.setMode(bakMode);
-   * t.popState(); t.gotoNextCousinParentOf(nodeType, nodeName, nodeValue);
-   * t.pushState(); t.setMode(XmlTreeHandler.MODE_SELECT);
-   * t.gotoFirstChildNode(nodeType, nodeName);
+   * private void test_PARENTOF(char nodeType, String nodeName, String nodeValue, boolean
+   * pivotCousin) throws Exception { doc = new XmlDocument(new
+   * File("XML4tests"),"config4parentof.xml"); doc.load();
+   * t.setStartingElement(doc.getDocument().getRootElement()); char bakMode=t.getMode();
+   * t.setMode(XmlTreeHandler.MODE_SELECT); System.out.println("START"); t.gotoFirstChild("cousin");
+   * if (pivotCousin) { t.setCurrentElementAsCousinsAncestor(); }
+   * System.out.println("\t"+t.getCurrentElement()); t.gotoFirstChild("brother");
+   * System.out.println("\t\t"+t.getCurrentElement()); t.gotoFirstChild("LDAPRealm");
+   * System.out.print("\t\t\t"+t.getCurrentElement()+" : "); t.setMode(bakMode); t.pushState();
+   * t.setMode(XmlTreeHandler.MODE_SELECT); t.gotoFirstChildNode(nodeType, nodeName);
+   * System.out.println(t.getCurrentNode()); t.setMode(bakMode); t.popState(); if (pivotCousin) {
+   * System.out.println("pivot : cousin"); } else { System.out.println("pivot : root"); }
+   * t.setMode(bakMode); t.gotoSelfOrCousinParentOf(nodeType, nodeName, nodeValue); t.pushState();
+   * t.setMode(XmlTreeHandler.MODE_SELECT); t.gotoFirstChildNode(nodeType, nodeName);
    * System.out.println(t.getCurrentNode()); t.setMode(bakMode); t.popState();
    * t.gotoNextCousinParentOf(nodeType, nodeName, nodeValue); t.pushState();
-   * t.setMode(XmlTreeHandler.MODE_SELECT); t.gotoFirstChildNode(nodeType,
-   * nodeName); System.out.println(t.getCurrentNode()); t.setMode(bakMode);
-   * t.popState(); // save result String action=null; switch (t.getMode()) {
-   * case XmlTreeHandler.MODE_DELETE : action="DELETE"; break; case
-   * XmlTreeHandler.MODE_INSERT : action="INSERT"; break; case
-   * XmlTreeHandler.MODE_UNIQUE : action="UNIQUE"; break; case
-   * XmlTreeHandler.MODE_UPDATE : action="UPDATE"; break; } String node=null;
-   * switch (nodeType) { case XmlTreeHandler.TYPE_ATTRIBUTE : node="ATTRIBUTE";
-   * break; case XmlTreeHandler.TYPE_ELEMENT : node="ELEMENT"; break; } if
-   * (t.getMode()!=XmlTreeHandler.MODE_SELECT) {
-   * doc.setName("PARENTOF_"+node+"("
+   * t.setMode(XmlTreeHandler.MODE_SELECT); t.gotoFirstChildNode(nodeType, nodeName);
+   * System.out.println(t.getCurrentNode()); t.setMode(bakMode); t.popState();
+   * t.gotoNextCousinParentOf(nodeType, nodeName, nodeValue); t.pushState();
+   * t.setMode(XmlTreeHandler.MODE_SELECT); t.gotoFirstChildNode(nodeType, nodeName);
+   * System.out.println(t.getCurrentNode()); t.setMode(bakMode); t.popState(); // save result String
+   * action=null; switch (t.getMode()) { case XmlTreeHandler.MODE_DELETE : action="DELETE"; break;
+   * case XmlTreeHandler.MODE_INSERT : action="INSERT"; break; case XmlTreeHandler.MODE_UNIQUE :
+   * action="UNIQUE"; break; case XmlTreeHandler.MODE_UPDATE : action="UPDATE"; break; } String
+   * node=null; switch (nodeType) { case XmlTreeHandler.TYPE_ATTRIBUTE : node="ATTRIBUTE"; break;
+   * case XmlTreeHandler.TYPE_ELEMENT : node="ELEMENT"; break; } if
+   * (t.getMode()!=XmlTreeHandler.MODE_SELECT) { doc.setName("PARENTOF_"+node+"("
    * +nodeName+(nodeValue==null?"":"("+nodeValue+
-   * ")")+")_"+action+"_"+(pivotCousin?"cousin":"root")+"_"+doc.getName());
-   * doc.save(); } }
+   * ")")+")_"+action+"_"+(pivotCousin?"cousin":"root")+"_"+doc.getName()); doc.save(); } }
    */
   public TestXmlTreeHandler() throws Exception {
     t = new XmlTreeHandler();

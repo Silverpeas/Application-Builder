@@ -36,7 +36,6 @@ import java.util.jar.JarFile;
 
 /**
  * Convenient class for archive reading in conjunction with WriteOnlyArchive.
- * 
  * @author Silverpeas
  * @version 1.0/B
  * @since 1.0/B
@@ -47,11 +46,8 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
 
   /**
    * Builder for a read only archive.
-   * 
-   * @param directory
-   *          The absolute path to the directory hosting the archive
-   * @param fileName
-   *          The name of the archive in the file system
+   * @param directory The absolute path to the directory hosting the archive
+   * @param fileName The name of the archive in the file system
    * @since 1.0
    */
   public ReadOnlyArchive(File directory, String fileName)
@@ -62,7 +58,6 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
 
   /**
    * Gets the Archive file
-   * 
    * @return the JarFile object denoting this archive
    * @since 1.0
    * @roseuid 3AB21BA80089
@@ -73,7 +68,6 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
 
   /**
    * Sets the Archive file
-   * 
    * @since 1.0
    */
   private void setJar() throws AppBuilderException {
@@ -97,9 +91,7 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
   }
 
   /**
-   * Gets the available entries in the archive. It also opens the archive for
-   * reading.
-   * 
+   * Gets the available entries in the archive. It also opens the archive for reading.
    * @return the entries of this archive
    * @since 1.0
    * @roseuid 3AAFB0770391
@@ -131,8 +123,7 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
   }
 
   /**
-   * @param entry
-   *          the entry to read
+   * @param entry the entry to read
    * @return the stream for reading the contents of the entry
    * @since 1.0/B
    * @roseuid 3AB080F602D2
@@ -154,8 +145,7 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
   }
 
   /**
-   * @param entry
-   *          the entry to read
+   * @param entry the entry to read
    * @return the stream for reading the contents of the entry
    * @since 1.0/B
    * @roseuid 3AB080F602D2
@@ -173,9 +163,7 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
   }
 
   /**
-   * When no more entries have to be read, call this method to close the
-   * archive.
-   * 
+   * When no more entries have to be read, call this method to close the archive.
    * @roseuid 3AB1E9D800BF
    */
   public void close() throws AppBuilderException {
@@ -190,8 +178,7 @@ public class ReadOnlyArchive extends ApplicationBuilderItem {
   }
 
   /**
-   * @param entry
-   *          the entry to read
+   * @param entry the entry to read
    * @return the jarEntry of the entry (null if not found or directory)
    * @since 1.0/B
    * @roseuid 3AB080F602D2

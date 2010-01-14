@@ -31,9 +31,8 @@ import java.util.Arrays;
 import com.silverpeas.installedtree.DirectoryLocator;
 
 /**
- * Uses one contribution file to provide the elements that can be included
- * directly in the target structure (EAR and Client).
- * 
+ * Uses one contribution file to provide the elements that can be included directly in the target
+ * structure (EAR and Client).
  * @author Silverpeas
  * @version 1.0
  * @since 1.0
@@ -96,12 +95,9 @@ public class Contribution extends XmlDocument implements Comparable {
   }
 
   /**
-   * Private setter for "theClientPart" attribute. Retrieves the client part
-   * archive name in the contribution descriptor and wraps it as a
-   * ReadOnlyArchive.
-   * 
-   * @throw AppBuilderException if there is more than one client part in the
-   *        descriptor
+   * Private setter for "theClientPart" attribute. Retrieves the client part archive name in the
+   * contribution descriptor and wraps it as a ReadOnlyArchive.
+   * @throw AppBuilderException if there is more than one client part in the descriptor
    */
   private void setClientPart() throws AppBuilderException {
     String[] values = this.getTagValues(CLIENT_TAG);
@@ -124,7 +120,6 @@ public class Contribution extends XmlDocument implements Comparable {
 
   /**
    * If no client part is contributed, returns <code>null</code>
-   * 
    * @return the client archive
    * @roseuid 3AAE586D01D4
    */
@@ -168,8 +163,7 @@ public class Contribution extends XmlDocument implements Comparable {
 
   /**
    * Private setter for <code>theWARPart</code> attribute. Instantiate a
-   * <code>ReadOnlyArchive</code> object with the contribution descriptor
-   * information.
+   * <code>ReadOnlyArchive</code> object with the contribution descriptor information.
    */
   private void setWARPart() throws AppBuilderException {
     String[] values = this.getTagValues(WEB_APP_TAG);
@@ -239,8 +233,8 @@ public class Contribution extends XmlDocument implements Comparable {
   }
 
   /**
-   * @return the type of the product described by this contribution. Currently,
-   *         there are two types : 'component' and 'applicativebus'.
+   * @return the type of the product described by this contribution. Currently, there are two types
+   * : 'component' and 'applicativebus'.
    * @roseuid 3AB0A23E01C0
    */
   public String getPackageType() {
@@ -282,9 +276,8 @@ public class Contribution extends XmlDocument implements Comparable {
 
   /**
    * Needed to avoid weird behaviour with sorted collections
-   * 
-   * @return True if and only if priorities are equal and names are equal Since
-   *         priority is contained in name, True if and only if names are equal
+   * @return True if and only if priorities are equal and names are equal Since priority is contained
+   * in name, True if and only if names are equal
    */
   public boolean equals(Object o) {
     return ((Contribution) o).getName().equals(getName());

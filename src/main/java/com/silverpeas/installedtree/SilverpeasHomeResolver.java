@@ -31,25 +31,24 @@ public class SilverpeasHomeResolver {
   private static boolean abortOnError = true;
 
   /**
-   * If set to TRUE, program is exited if Silverpeas install location cannot be
-   * found. Else, a message is issued and execution goes on
+   * If set to TRUE, program is exited if Silverpeas install location cannot be found. Else, a
+   * message is issued and execution goes on
    */
   public static void setAbortOnError(boolean on) {
     abortOnError = on;
   }
 
   /**
-   * If TRUE, program is exited if Silverpeas install location cannot be found.
-   * Else, a message is issued and execution goes on
+   * If TRUE, program is exited if Silverpeas install location cannot be found. Else, a message is
+   * issued and execution goes on
    */
   public static boolean getAbortOnError() {
     return abortOnError;
   }
 
   /**
-   * Finds Silverpeas install directory Silverpeas install location may be set
-   * by using -Dsilverpeas.home=<i>location</i> on java command line
-   * 
+   * Finds Silverpeas install directory Silverpeas install location may be set by using
+   * -Dsilverpeas.home=<i>location</i> on java command line
    * @return the silverpeas home directory
    */
   public static String getHome() {
