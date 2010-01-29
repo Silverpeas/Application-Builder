@@ -5,10 +5,17 @@
   <parent>
     <groupId>com.silverpeas</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <relativePath>../../parent/pom.xml</relativePath>
   </parent>
 
+  <scm>
+    <connection>scm:svn:https://repository.silverpeas.org/svn/silverpeas/services/application-builder/trunk</connection>
+    <developerConnection>scm:svn:https://repository.silverpeas.org/svn/silverpeas/services/application-builder/trunk</developerConnection>
+    <url>https://repository.silverpeas.org/svn/silverpeas/services/application-builder/trunk</url>
+  </scm>
+  
+  
   <groupId>com.silverpeas.builder</groupId>
   <artifactId>application-builder</artifactId>
   <packaging>jar</packaging>
