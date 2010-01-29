@@ -276,8 +276,8 @@ public class Contribution extends XmlDocument implements Comparable {
 
   /**
    * Needed to avoid weird behaviour with sorted collections
-   * @return True if and only if priorities are equal and names are equal Since priority is contained
-   * in name, True if and only if names are equal
+   * @return True if and only if priorities are equal and names are equal Since priority is
+   * contained in name, True if and only if names are equal
    */
   public boolean equals(Object o) {
     return ((Contribution) o).getName().equals(getName());
