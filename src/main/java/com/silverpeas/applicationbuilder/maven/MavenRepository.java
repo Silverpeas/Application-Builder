@@ -26,6 +26,7 @@ package com.silverpeas.applicationbuilder.maven;
 import com.silverpeas.applicationbuilder.AppBuilderException;
 import com.silverpeas.installedtree.DirectoryLocator;
 import java.io.File;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +35,8 @@ import java.util.List;
  */
 public class MavenRepository {
 
-  private List<MavenContribution> contributions = new LinkedList<MavenContribution>();
+  private final transient List<MavenContribution> contributions =
+      new LinkedList<MavenContribution>();
 
   public MavenRepository() throws AppBuilderException {
     init();
@@ -48,36 +50,41 @@ public class MavenRepository {
   }
 
   protected void loadClients() throws AppBuilderException {
-    File[] archives = listArchivesInDirectory(DirectoryLocator.getClientContribHome());
+    final File[] archives = listArchivesInDirectory(DirectoryLocator.getClientContribHome());
     for (File archive : archives) {
-      contributions
-          .add(new MavenContribution(new File[] { archive }, MavenContribution.TYPE_CLIENT));
+      contributions.add(new MavenContribution(archive, MavenContribution.TYPE_CLIENT));
     }
   }
 
   protected void loadWarParts() throws AppBuilderException {
-    File[] archives = listArchivesInDirectory(DirectoryLocator.getWarContribHome());
+    final File[] archives = listArchivesInDirectory(DirectoryLocator.getWarContribHome());
     for (File archive : archives) {
-      contributions.add(new MavenContribution(new File[] { archive }, MavenContribution.TYPE_WAR));
+      contributions.add(new MavenContribution(archive, MavenContribution.TYPE_WAR));
     }
   }
 
   protected void loadEjbs() throws AppBuilderException {
-    File[] archives = listArchivesInDirectory(DirectoryLocator.getEjbContribHome());
+    final File[] archives = listArchivesInDirectory(DirectoryLocator.getEjbContribHome());
     contributions.add(new MavenContribution(archives, MavenContribution.TYPE_EJB));
   }
 
   protected void loadLibrairies() throws AppBuilderException {
-    File[] archives = listArchivesInDirectory(DirectoryLocator.getLibContribHome());
+    final File[] archives = listArchivesInDirectory(DirectoryLocator.getLibContribHome());
     contributions.add(new MavenContribution(archives, MavenContribution.TYPE_LIB));
   }
 
-  protected File[] listArchivesInDirectory(String directoryPath) {
-    File directory = new File(directoryPath);
+  protected File[] listArchivesInDirectory(final String directoryPath) {
+    File[] archives;
+    final File directory = new File(directoryPath);
     if (directory.exists() && directory.isDirectory()) {
-      return directory.listFiles(new ArchiveFilenameFilter());
+      archives = directory.listFiles(new ArchiveFilenameFilter());
+      final List<File> files = java.util.Arrays.asList(archives);
+      Collections.sort(files, new FileComparator());
+      archives = files.toArray(new File[files.size()]);
+    } else {
+      archives = new File[0];
     }
-    return new File[0];
+    return archives;
   }
 
   public MavenContribution[] getContributions() {

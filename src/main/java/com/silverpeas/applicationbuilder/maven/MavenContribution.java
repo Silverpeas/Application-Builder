@@ -40,35 +40,43 @@ public class MavenContribution {
   public static final int TYPE_CLIENT = 2;
   public static final int TYPE_LIB = 3;
   private int type;
-  private StringBuffer packageName = new StringBuffer();
+  private transient final StringBuffer packageName = new StringBuffer();
   /** attributes */
   private ReadOnlyArchive client = null;
-  private List<ApplicationBuilderItem> ejbs = new ArrayList<ApplicationBuilderItem>();
+  private transient final List<ApplicationBuilderItem> ejbs =
+      new ArrayList<ApplicationBuilderItem>();
   private ReadOnlyArchive warPart = null;
-  private List<ReadOnlyArchive> librairies = new ArrayList<ReadOnlyArchive>();
+  private transient final List<ReadOnlyArchive> librairies = new ArrayList<ReadOnlyArchive>();
 
-  public MavenContribution(File[] contributions, int type) throws AppBuilderException {
+  public MavenContribution(final File contribution, final int type) throws AppBuilderException {
     this.type = type;
+    addContribution(contribution, type);
+  }
+
+  private void addContribution(final File contribution, final int type) throws AppBuilderException {
+    packageName.append(contribution.getAbsolutePath());
+    packageName.append(File.pathSeparatorChar).append(' ');
+    switch (type) {
+      case TYPE_WAR:
+        warPart = new ReadOnlyArchive(contribution.getParentFile(), contribution.getName());
+        break;
+      case TYPE_EJB:
+        ejbs.add(new ApplicationBuilderItem(contribution.getParentFile(), contribution.getName()));
+        break;
+      case TYPE_CLIENT:
+        client = new ReadOnlyArchive(contribution.getParentFile(), contribution.getName());
+        break;
+      case TYPE_LIB:
+        librairies.add(new ReadOnlyArchive(contribution.getParentFile(), contribution.getName()));
+        break;
+      default:
+        break;
+    }
+  }
+
+  public MavenContribution(final File[] contributions, final int type) throws AppBuilderException {
     for (File contribution : contributions) {
-      packageName.append(contribution.getAbsolutePath());
-      packageName.append(System.getProperty("path.separator") + ' ');
-      switch (type) {
-        case TYPE_WAR:
-          warPart = new ReadOnlyArchive(contribution.getParentFile(), contribution.getName());
-          break;
-        case TYPE_EJB:
-          ejbs
-              .add(new ApplicationBuilderItem(contribution.getParentFile(), contribution.getName()));
-          break;
-        case TYPE_CLIENT:
-          client = new ReadOnlyArchive(contribution.getParentFile(), contribution.getName());
-          break;
-        case TYPE_LIB:
-          librairies.add(new ReadOnlyArchive(contribution.getParentFile(), contribution.getName()));
-          break;
-        default:
-          break;
-      }
+      addContribution(contribution, type);
     }
   }
 
