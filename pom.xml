@@ -38,9 +38,9 @@
   <build>
     <plugins>
       <plugin>
-          <groupId>org.silverpeas.services</groupId>
-          <artifactId>code-formatter-plugin</artifactId>
-        </plugin>
+        <groupId>org.silverpeas.services</groupId>
+        <artifactId>code-formatter-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 </project>
