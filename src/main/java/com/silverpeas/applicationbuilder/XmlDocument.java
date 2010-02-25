@@ -39,6 +39,7 @@ import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -156,7 +157,7 @@ public class XmlDocument extends ApplicationBuilderItem {
    * are removed.</strong>
    * @roseuid 3AAF3793006E
    */
-  public void mergeWith(String[] tagsToMerge, XmlDocument XmlFile)
+  public void mergeWith(String[] tagsToMerge, XmlDocument xmlFile)
       throws AppBuilderException {
     /**
      * gets the resulting document from the master document. Cloning the document is important. If
@@ -167,7 +168,7 @@ public class XmlDocument extends ApplicationBuilderItem {
     root.detach();
 
     /** gets the root element of the documents to merge (excluding master) */
-    org.jdom.Document documentToBeMerged = (org.jdom.Document) XmlFile.getDocument().clone();
+    org.jdom.Document documentToBeMerged = (org.jdom.Document) xmlFile.getDocument().clone();
     Element tempRoot = documentToBeMerged.getRootElement();
 
     /** gets all the elements which will be included in the resulting document */
@@ -177,6 +178,13 @@ public class XmlDocument extends ApplicationBuilderItem {
           Element newElement = (Element) ((Element) child).clone();
           newElement.detach();
           newElement.setNamespace(root.getNamespace());
+          Iterator descendantsIter = newElement.getDescendants();
+          while (descendantsIter.hasNext()) {
+            Object descendant = descendantsIter.next();
+            if (descendant instanceof Element) {
+              ((Element) descendant).setNamespace(root.getNamespace());
+            }
+          }
           root.addContent(newElement);
         }
       }

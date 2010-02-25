@@ -22,7 +22,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\WARDescriptor.java
-
 package com.silverpeas.applicationbuilder;
 
 import org.jdom.DocType;
@@ -43,19 +42,17 @@ public class WARDescriptor extends XmlDocument {
    * @since 1.0/B
    */
   private static final String NAME = "web.xml";
-
   /**
    * @since 1.0/B
    */
   private static final String LOCATION = "WEB-INF";
-
   private static final String ROOT_ELT = "web-app";
   private static final String SERVLET_VERSION = "2.4";
   private static final String ROOT_NAMESPACE = "http://java.sun.com/xml/ns/j2ee";
   private static final String[][] ROOT_ADDITIONAL_NAMESPACE = {
       { "xsi", "http://www.w3.org/2001/XMLSchema-instance" },
-      { "schemaLocation", "http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" } };
-
+      { "schemaLocation",
+      "http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" } };
   private static final String NAME_ELT = "display-name";
   private static final String DESC_ELT = "description";
   private static final String[] TAGS_TO_MERGE = { "context-param", "filter",
@@ -63,7 +60,7 @@ public class WARDescriptor extends XmlDocument {
       "session-config" };
   private static final String[] TAGS_TO_SORT = { NAME_ELT, DESC_ELT,
       "context-param", "filter", "filter-mapping", "listener", "servlet",
-      "servlet-mapping", "session-config" };;
+      "servlet-mapping", "session-config" };
 
   public WARDescriptor() {
     super(LOCATION, NAME);
@@ -94,10 +91,10 @@ public class WARDescriptor extends XmlDocument {
       root.addNamespaceDeclaration(Namespace.getNamespace(
           ROOT_ADDITIONAL_NAMESPACE[i][0], ROOT_ADDITIONAL_NAMESPACE[i][1]));
     }
-    Element name = new Element(NAME_ELT);
+    Element name = new Element(NAME_ELT, nameSpace);
     name.setText(ApplicationBuilder.getApplicationName());
     root.addContent(name);
-    Element desc = new Element(DESC_ELT);
+    Element desc = new Element(DESC_ELT, nameSpace);
     desc.setText(ApplicationBuilder.getApplicationDescription());
     root.addContent(desc);
     Document doc = new Document(root);
