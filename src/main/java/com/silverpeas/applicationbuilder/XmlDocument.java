@@ -24,6 +24,7 @@
 //Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\XmlDocument.java
 package com.silverpeas.applicationbuilder;
 
+import com.silverpeas.applicationbuilder.maven.WarElementComparator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -39,7 +41,6 @@ import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -225,6 +226,7 @@ public class XmlDocument extends ApplicationBuilderItem {
           }
         }
       }
+      Collections.sort(eltLst, new WarElementComparator());
       eltLstLst.add(iTag, eltLst);
     }
 
@@ -356,8 +358,7 @@ public class XmlDocument extends ApplicationBuilderItem {
       result.add(getDocument().getRootElement().getText());
     }
 
-    Iterator iChildren = getDocument().getRootElement().getChildren(tagToFind)
-        .iterator();
+    Iterator iChildren = getDocument().getRootElement().getChildren(tagToFind).iterator();
     while (iChildren.hasNext()) {
       result.add(((Element) iChildren.next()).getText());
     }
@@ -381,8 +382,7 @@ public class XmlDocument extends ApplicationBuilderItem {
           attributeToFind));
     }
 
-    Iterator iChildren = getDocument().getRootElement().getChildren()
-        .iterator();
+    Iterator iChildren = getDocument().getRootElement().getChildren().iterator();
     Element currentElement = null;
     while (iChildren.hasNext()) {
       currentElement = (Element) iChildren.next();

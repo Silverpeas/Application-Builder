@@ -21,21 +21,54 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.silverpeas.applicationbuilder.maven;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.regex.Pattern;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import org.jdom.Content;
+import org.jdom.Element;
 
 /**
- * @author Administrateur
+ * @author ehsavoie
  */
-public class ArchiveFilenameFilter implements FilenameFilter {
+public class WarElementComparator implements Comparator<Content> {
 
-  protected static final Pattern ARCHIVE_PATTERN = Pattern.compile(".*\\..[aA][rR]");
+  private final static Map<String, Integer> servletTags = new HashMap<String, Integer>();
+
+  static {
+    servletTags.put("display-name", 3);
+    servletTags.put("servlet-name", 2);
+    servletTags.put("servlet-class", 1);
+  }
 
   @Override
-  public boolean accept(File dir, String name) {
-    return ARCHIVE_PATTERN.matcher(name).matches();
+  public int compare(Content content1, Content content2) {
+    if (content1 instanceof Element) {
+      if (content2 instanceof Element) {
+        return compare((Element) content1, (Element) content2);
+      }
+      return 1;
+    }
+    return -1;
+  }
+
+  public int compare(Element content1, Element content2) {
+    String name1 = content1.getName();
+    int value1 = 0;
+    if (servletTags.containsKey(name1)) {
+      value1 = servletTags.get(name1);
+    }
+    String name2 = content1.getName();
+    int value2 = 0;
+    if (servletTags.containsKey(name2)) {
+      value2 = servletTags.get(name2);
+    }
+    return value1 - value2;
   }
 }
