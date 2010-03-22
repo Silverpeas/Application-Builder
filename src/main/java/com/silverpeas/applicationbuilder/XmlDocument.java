@@ -21,10 +21,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\XmlDocument.java
 package com.silverpeas.applicationbuilder;
 
-import com.silverpeas.applicationbuilder.maven.WarElementComparator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -32,7 +30,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -207,7 +204,10 @@ public class XmlDocument extends ApplicationBuilderItem {
      * twice in the document
      */
     Element root = getDocument().getRootElement();
+    setDocument(new Document(sort(root, tagsToSort)));
+  }
 
+  public Element sort(Element root, java.lang.String[] tagsToSort) throws AppBuilderException {
     Element tempRoot = (Element) root.clone();
     tempRoot.detach();
     tempRoot.removeContent();
@@ -226,12 +226,10 @@ public class XmlDocument extends ApplicationBuilderItem {
           }
         }
       }
-      Collections.sort(eltLst, new WarElementComparator());
       eltLstLst.add(iTag, eltLst);
     }
 
     /** Orders the content of the resulting document */
-    // List allEltLst = root.getContent();
     for (int iTag = 0; iTag < tagsToSort.length; iTag++) {
       if (!((List) eltLstLst.get(iTag)).isEmpty()) {
         tempRoot.addContent((List) eltLstLst.get(iTag));
@@ -239,7 +237,7 @@ public class XmlDocument extends ApplicationBuilderItem {
     }
 
     /** the result */
-    setDocument(new Document(tempRoot));
+    return tempRoot;
   }
 
   /**
@@ -326,7 +324,7 @@ public class XmlDocument extends ApplicationBuilderItem {
       eltLstLst.add(iTag, eltLst);
     }
 
-    if (eltLstLst.size() == 0) {
+    if (eltLstLst.isEmpty()) {
       return null;
     }
 
@@ -363,7 +361,7 @@ public class XmlDocument extends ApplicationBuilderItem {
       result.add(((Element) iChildren.next()).getText());
     }
 
-    if (result.size() == 0) {
+    if (result.isEmpty()) {
       return null;
     }
 
@@ -391,7 +389,7 @@ public class XmlDocument extends ApplicationBuilderItem {
       }
 
     }
-    if (result.size() == 0) {
+    if (result.isEmpty()) {
       return null;
     }
 

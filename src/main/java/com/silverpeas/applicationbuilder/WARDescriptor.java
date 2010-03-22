@@ -21,10 +21,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\WARDescriptor.java
 package com.silverpeas.applicationbuilder;
 
-import org.jdom.DocType;
+import java.util.ArrayList;
+import java.util.List;
+import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
@@ -49,18 +50,17 @@ public class WARDescriptor extends XmlDocument {
   private static final String ROOT_ELT = "web-app";
   private static final String SERVLET_VERSION = "2.4";
   private static final String ROOT_NAMESPACE = "http://java.sun.com/xml/ns/j2ee";
-  private static final String[][] ROOT_ADDITIONAL_NAMESPACE = {
-      { "xsi", "http://www.w3.org/2001/XMLSchema-instance" },
-      { "schemaLocation",
-      "http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" } };
+  private static final String[][] ROOT_ADDITIONAL_NAMESPACE = { { "xsi",
+      "http://www.w3.org/2001/XMLSchema-instance" } };
   private static final String NAME_ELT = "display-name";
+  private static final String SERVLET_ELT = "servlet";
   private static final String DESC_ELT = "description";
-  private static final String[] TAGS_TO_MERGE = { "context-param", "filter",
-      "filter-mapping", "listener", "servlet", "servlet-mapping",
-      "session-config" };
-  private static final String[] TAGS_TO_SORT = { NAME_ELT, DESC_ELT,
-      "context-param", "filter", "filter-mapping", "listener", "servlet",
-      "servlet-mapping", "session-config" };
+  private static final String[] TAGS_TO_MERGE = { "context-param", "filter", "filter-mapping",
+      "listener", SERVLET_ELT, "servlet-mapping", "session-config" };
+  private static final String[] TAGS_TO_SORT = { NAME_ELT, DESC_ELT, "context-param", "filter",
+      "filter-mapping", "listener", SERVLET_ELT, "servlet-mapping", "session-config" };
+  private static final String[] SERVLET_TAGS = { "display-name", "servlet-name", "servlet-class",
+      "init-param" };
 
   public WARDescriptor() {
     super(LOCATION, NAME);
@@ -80,7 +80,48 @@ public class WARDescriptor extends XmlDocument {
    * in an application server.
    */
   public void sort() throws AppBuilderException {
-    sort(TAGS_TO_SORT);
+    /**
+     * gets the resulting document from the master document. Cloning the document is important. If
+     * you clone or copy an element, the copy keeps his owner and, as a result, the element appears
+     * twice in the document
+     */
+    Element root = getDocument().getRootElement();
+
+    Element tempRoot = (Element) root.clone();
+    tempRoot.detach();
+    tempRoot.removeContent();
+
+    /** Makes groups of elements by tag */
+    List eltLstLst = new ArrayList(TAGS_TO_SORT.length);
+    for (int iTag = 0; iTag < TAGS_TO_SORT.length; iTag++) {
+      List children = root.getChildren(TAGS_TO_SORT[iTag], root.getNamespace());
+      List eltLst = new ArrayList();
+      if (children != null && !children.isEmpty()) {
+        for (Object child : children) {
+          if (child instanceof Content) {
+            Content newElement = (Content) ((Content) child).clone();
+            if (newElement instanceof Element
+                && SERVLET_ELT.equalsIgnoreCase(((Element) newElement).getName())) {
+              eltLst.add(sort((Element) newElement, SERVLET_TAGS));
+            } else {
+              newElement.detach();
+              eltLst.add(newElement);
+            }
+          }
+        }
+      }
+      eltLstLst.add(iTag, eltLst);
+    }
+    /** Orders the content of the resulting document */
+    for (int iTag = 0; iTag < TAGS_TO_SORT.length; iTag++) {
+
+      if (!((List) eltLstLst.get(iTag)).isEmpty()) {
+        tempRoot.addContent((List) eltLstLst.get(iTag));
+      }
+    }
+
+    /** the result */
+    setDocument(new Document(tempRoot));
   }
 
   private void setDocument() {
@@ -91,6 +132,11 @@ public class WARDescriptor extends XmlDocument {
       root.addNamespaceDeclaration(Namespace.getNamespace(
           ROOT_ADDITIONAL_NAMESPACE[i][0], ROOT_ADDITIONAL_NAMESPACE[i][1]));
     }
+    Namespace xsiNamespace = Namespace.getNamespace("xsi",
+        "http://www.w3.org/2001/XMLSchema-instance");
+    root.setAttribute("schemaLocation",
+        "http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd",
+        xsiNamespace);
     Element name = new Element(NAME_ELT, nameSpace);
     name.setText(ApplicationBuilder.getApplicationName());
     root.addContent(name);
@@ -98,6 +144,8 @@ public class WARDescriptor extends XmlDocument {
     desc.setText(ApplicationBuilder.getApplicationDescription());
     root.addContent(desc);
     Document doc = new Document(root);
+
     super.setDocument(doc);
+
   }
 }
