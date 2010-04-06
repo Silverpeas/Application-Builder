@@ -60,7 +60,7 @@ public class WARDescriptor extends XmlDocument {
   private static final String[] TAGS_TO_SORT = { NAME_ELT, DESC_ELT, "context-param", "filter",
       "filter-mapping", "listener", SERVLET_ELT, "servlet-mapping", "session-config" };
   private static final String[] SERVLET_TAGS = { "display-name", "servlet-name", "servlet-class",
-      "init-param" };
+      "init-param", "load-on-startup", "param-name", "param-value" };
 
   public WARDescriptor() {
     super(LOCATION, NAME);
