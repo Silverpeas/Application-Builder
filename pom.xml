@@ -8,16 +8,16 @@
   </parent>
 
   <scm>
-    <connection>scm:svn:https://repository.silverpeas.org/svn/silverpeas/services/application-builder/tags/application-builder-1.4</connection>
-    <developerConnection>scm:svn:https://repository.silverpeas.org/svn/silverpeas/services/application-builder/tags/application-builder-1.4</developerConnection>
-    <url>https://repository.silverpeas.org/svn/silverpeas/services/application-builder/tags/application-builder-1.4</url>
+    <connection>scm:svn:https://repository.silverpeas.org/svn/silverpeas/services/application-builder/trunk</connection>
+    <developerConnection>scm:svn:https://repository.silverpeas.org/svn/silverpeas/services/application-builder/trunk</developerConnection>
+    <url>https://repository.silverpeas.org/svn/silverpeas/services/application-builder/trunk</url>
   </scm>
   
   
   <groupId>com.silverpeas.builder</groupId>
   <artifactId>application-builder</artifactId>
   <packaging>jar</packaging>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT</version>
   <name>application-builder</name>
   
   <dependencies>
