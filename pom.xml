@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.silverpeas</groupId>
     <artifactId>parent</artifactId>
-    <version>14-SNAPSHOT</version>
+    <version>14</version>
   </parent>
 
   <scm>
@@ -12,14 +12,14 @@
     <developerConnection>scm:svn:https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</developerConnection>
     <url>https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</url>
   </scm>
-  
-  
+
+
   <groupId>com.silverpeas.builder</groupId>
   <artifactId>application-builder</artifactId>
   <packaging>jar</packaging>
   <version>1.5-SNAPSHOT</version>
   <name>application-builder</name>
-  
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
