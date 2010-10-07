@@ -55,7 +55,7 @@ import org.jdom.output.XMLOutputter;
  */
 public class XmlDocument extends ApplicationBuilderItem {
 
-  private String doctypeDecl = null;
+  // private String doctypeDecl = null;
   private XMLOutputter outputter = null;
   /**
    * @since 1.0
@@ -64,7 +64,7 @@ public class XmlDocument extends ApplicationBuilderItem {
   /**
    * @since 1.0
    */
-  private java.lang.String outputEncoding = "ISO-8859-1";
+  private java.lang.String outputEncoding = "UTF-8";
 
   public XmlDocument() {
   }
@@ -116,7 +116,7 @@ public class XmlDocument extends ApplicationBuilderItem {
           + "\" does not exist");
     }
     try {
-      loadFrom(getPath().toURL().openStream());
+      loadFrom(getPath().toURI().toURL().openStream());
     } catch (java.net.MalformedURLException mue) {
       throw new AppBuilderException("Could not load \""
           + getPath().getAbsolutePath() + "\"", mue);
