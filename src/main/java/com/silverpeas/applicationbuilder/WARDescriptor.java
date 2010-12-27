@@ -56,12 +56,14 @@ public class WARDescriptor extends XmlDocument {
   private static final String NAME_ELT = "display-name";
   private static final String SERVLET_ELT = "servlet";
   private static final String DESC_ELT = "description";
-  private static final String[] TAGS_TO_MERGE = { "context-param", "filter", "filter-mapping",
-      "listener", SERVLET_ELT, "servlet-mapping", "session-config", "jsp-config" };
+  private static final String[] TAGS_TO_MERGE =
+      { "context-param", "filter", "filter-mapping",
+          "listener", SERVLET_ELT, "servlet-mapping", "session-config", "jsp-config",
+          "security-constraint" };
   private static final String[] TAGS_TO_SORT =
       { NAME_ELT, DESC_ELT, "context-param", "filter",
       "filter-mapping", "listener", SERVLET_ELT, "servlet-mapping", "session-config",
-      "jsp-config" };
+      "jsp-config", "security-constraint" };
   private static final String[] SERVLET_TAGS = { "display-name", "servlet-name", "servlet-class",
       "init-param", "load-on-startup", "param-name", "param-value" };
 
