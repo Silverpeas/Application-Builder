@@ -58,8 +58,8 @@ public class WARDescriptor extends XmlDocument {
   private static final String DESC_ELT = "description";
   private static final String[] TAGS_TO_MERGE =
       { "context-param", "filter", "filter-mapping",
-          "listener", SERVLET_ELT, "servlet-mapping", "session-config", "jsp-config",
-          "security-constraint" };
+      "listener", SERVLET_ELT, "servlet-mapping", "session-config", "jsp-config",
+      "security-constraint" };
   private static final String[] TAGS_TO_SORT =
       { NAME_ELT, DESC_ELT, "context-param", "filter",
       "filter-mapping", "listener", SERVLET_ELT, "servlet-mapping", "session-config",

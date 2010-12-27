@@ -45,8 +45,7 @@ import java.util.Set;
 public class WARDirectory extends ApplicationBuilderItem {
 
   private File warDir = null;
-  private Set alreadyAddedDirs = new HashSet();
-  private Map alreadyAddedFiles = new HashMap();
+  private Map<String, String> alreadyAddedFiles = new HashMap<String, String>();
 
   int BUFSIZE = 16384;
   byte[] data = new byte[BUFSIZE];
@@ -55,16 +54,17 @@ public class WARDirectory extends ApplicationBuilderItem {
    * Builder for a write only archive.
    * @param directory The absolute path to the directory hosting the archive
    * @param fileName The name of the archive in the file system
+   * @throws AppBuilderException
    * @since 1.0
    */
-  public WARDirectory(File directory, String fileName)
-      throws AppBuilderException {
+  public WARDirectory(File directory, String fileName) throws AppBuilderException {
     warDir = new File(directory, fileName);
   }
 
   /**
    * Adds an XML file in the archive by the means of streams.
    * @param xmlDoc the XML document to add in the archive
+   * @throws AppBuilderException
    * @since 1.0
    * @roseuid 3AAF4D630303
    */
@@ -77,9 +77,8 @@ public class WARDirectory extends ApplicationBuilderItem {
       xmlDoc.saveTo(out);
       out.flush();
     } catch (Exception e) {
-      throw new AppBuilderException(getName()
-          + " : impossible to add the document \"" + xmlDoc.getArchivePath()
-          + "\"", e);
+      throw new AppBuilderException(getName() + " : impossible to add the document \""
+          + xmlDoc.getArchivePath() + "\"", e);
     } finally {
       close(out);
     }
@@ -88,6 +87,7 @@ public class WARDirectory extends ApplicationBuilderItem {
   /**
    * Adds an entry to the archive. The entry added is fetched from the file system
    * @param entry the file to add
+   * @throws AppBuilderException
    * @since 1.0
    * @roseuid 3AAF55F2017D
    */
@@ -106,6 +106,7 @@ public class WARDirectory extends ApplicationBuilderItem {
   /**
    * Merges an archive with this archive.
    * @param archive the archive to merge
+   * @throws AppBuilderException
    * @since 1.0
    */
   public void mergeWith(ReadOnlyArchive archive) throws AppBuilderException {
@@ -117,11 +118,11 @@ public class WARDirectory extends ApplicationBuilderItem {
    * @param archive the archive to merge
    * @param entryToExclude the entry to exclude from merge. Contains the archive path of the entry
    * to exclude.
+   * @throws AppBuilderException
    * @since 1.0
    */
-  public void mergeWith(ReadOnlyArchive archive, String entryToExclude)
-      throws AppBuilderException {
-    Set excludeSet = new HashSet(1);
+  public void mergeWith(ReadOnlyArchive archive, String entryToExclude) throws AppBuilderException {
+    Set<String> excludeSet = new HashSet<String>(1);
     excludeSet.add(entryToExclude);
     mergeWith(archive, excludeSet);
   }
@@ -131,27 +132,20 @@ public class WARDirectory extends ApplicationBuilderItem {
    * @param archive the archive to merge
    * @param entriesToExclude the entries to exclude from merge. Contains the archive paths of the
    * entries to exclude.
+   * @throws AppBuilderException
    * @since 1.0
    */
-  public void mergeWith(ReadOnlyArchive archive, Set entriesToExclude)
-      throws AppBuilderException {
+  public void mergeWith(ReadOnlyArchive archive, Set entriesToExclude) throws AppBuilderException {
     ApplicationBuilderItem[] entries = archive.getEntries();
-    ApplicationBuilderItem myEntry = null;
-    boolean filterOn = ((entriesToExclude != null) && (!entriesToExclude
-        .isEmpty()));
+    boolean filterOn = ((entriesToExclude != null) && (!entriesToExclude.isEmpty()));
     for (int iEntry = 0; iEntry < entries.length; iEntry++) {
-      if (!filterOn
-          || !entriesToExclude.contains(entries[iEntry].getArchivePath())) {
+      if (!filterOn || !entriesToExclude.contains(entries[iEntry].getArchivePath())) {
         if (alreadyAddedFiles.containsKey(entries[iEntry].getArchivePath())) {
-          Log.add(getName()
-              + " : already added from \""
-              + (String) alreadyAddedFiles
-              .get(entries[iEntry].getArchivePath()) + "\" : \""
-              + archive.getName() + "!" + entries[iEntry].getArchivePath()
-              + "\" ");
+          Log.add(getName() + " : already added from \"" +
+              alreadyAddedFiles.get(entries[iEntry].getArchivePath()) + "\" : \""
+              + archive.getName() + "!" + entries[iEntry].getArchivePath() + "\" ");
         } else {
-          alreadyAddedFiles.put(entries[iEntry].getArchivePath(), archive
-              .getName());
+          alreadyAddedFiles.put(entries[iEntry].getArchivePath(), archive.getName());
           add(entries[iEntry], archive.getEntry(entries[iEntry]));
         }
       }
@@ -160,6 +154,8 @@ public class WARDirectory extends ApplicationBuilderItem {
 
   /**
    * When all entries have been added, call this method to close the archive
+   * @param out
+   * @throws AppBuilderException
    * @roseuid 3AB1EAFE02FD
    */
   public void close(OutputStream out) throws AppBuilderException {
@@ -176,12 +172,12 @@ public class WARDirectory extends ApplicationBuilderItem {
    * Adds a new entry from a stream. The entry is placed and named according to the entry. It can be
    * usefull when merging two archives.
    * @param entry the description of the new entry
-   * @param in the stream carrying the contents of the new entry
+   * @param contents the stream carrying the contents of the new entry.
+   * @throws AppBuilderException
    * @since 1.0
    * @roseuid 3AB26A5F00FD
    */
-  public void add(ApplicationBuilderItem entry, InputStream contents)
-      throws AppBuilderException {
+  public void add(ApplicationBuilderItem entry, InputStream contents) throws AppBuilderException {
     OutputStream out = null;
     try {
       File destEntry;

@@ -4,21 +4,35 @@
   <parent>
     <groupId>com.silverpeas</groupId>
     <artifactId>parent</artifactId>
-    <version>17-SNAPSHOT</version>
+    <version>16</version>
   </parent>
-
-  <scm>
-    <connection>scm:svn:https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</connection>
-    <developerConnection>scm:svn:https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</developerConnection>
-    <url>https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</url>
-  </scm>
-
 
   <groupId>com.silverpeas.builder</groupId>
   <artifactId>application-builder</artifactId>
   <packaging>jar</packaging>
   <version>1.6-SNAPSHOT</version>
-  <name>application-builder</name>
+  <name>application-builder</name>  
+  
+  <scm>
+    <connection>scm:svn:https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</connection>
+    <developerConnection>scm:svn:https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</developerConnection>
+    <url>https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</url>
+  </scm>
+  
+  <repositories>
+    <repository>
+      <id>NexusSilverpeas</id>
+      <layout>default</layout>
+      <name>Silverpeas Repository</name>
+      <url>http://www.silverpeas.org/nexus/content/groups/silverpeas</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>

@@ -22,8 +22,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\WriteOnlyArchive.java
-
 package com.silverpeas.applicationbuilder;
 
 import java.io.File;
@@ -47,11 +45,10 @@ import java.util.zip.ZipEntry;
  */
 public class WriteOnlyArchive extends ApplicationBuilderItem {
 
-  protected static final String MANIFEST_PATH = "META-INF" + File.separator
-      + "MANIFEST.MF";
+  protected static final String MANIFEST_PATH = "META-INF" + File.separator + "MANIFEST.MF";
 
-  private Set alreadyAddedDirs = new HashSet();
-  private Map alreadyAddedFiles = new HashMap();
+  private Set<String> alreadyAddedDirs = new HashSet<String>();
+  private Map<String, String> alreadyAddedFiles = new HashMap<String, String>();
 
   private JarOutputStream jarOut = null;
   int BUFSIZE = 16384;
@@ -63,8 +60,7 @@ public class WriteOnlyArchive extends ApplicationBuilderItem {
    * @param fileName The name of the archive in the file system
    * @since 1.0
    */
-  public WriteOnlyArchive(File directory, String fileName)
-      throws AppBuilderException {
+  public WriteOnlyArchive(File directory, String fileName) throws AppBuilderException {
     super(directory, fileName);
     setOutputStream();
   }
@@ -127,7 +123,7 @@ public class WriteOnlyArchive extends ApplicationBuilderItem {
    */
   public void mergeWith(ReadOnlyArchive archive, String entryToExclude)
       throws AppBuilderException {
-    Set excludeSet = new HashSet(1);
+    Set<String> excludeSet = new HashSet<String>(1);
     excludeSet.add(entryToExclude);
     mergeWith(archive, excludeSet);
   }
@@ -151,8 +147,7 @@ public class WriteOnlyArchive extends ApplicationBuilderItem {
         if (alreadyAddedFiles.containsKey(entries[iEntry].getArchivePath())) {
           Log.add(getName()
               + " : already added from \""
-              + (String) alreadyAddedFiles
-              .get(entries[iEntry].getArchivePath()) + "\" : \""
+              + alreadyAddedFiles.get(entries[iEntry].getArchivePath()) + "\" : \""
               + archive.getName() + "!" + entries[iEntry].getArchivePath()
               + "\" ");
         } else {
@@ -219,7 +214,7 @@ public class WriteOnlyArchive extends ApplicationBuilderItem {
     try {
       OutputStream out = new FileOutputStream(getPath().getAbsolutePath());
       jarOut = new JarOutputStream(out);
-      jarOut.setMethod(jarOut.DEFLATED);
+      jarOut.setMethod(JarOutputStream.DEFLATED);
     } catch (Exception e) {
       throw new AppBuilderException(getPath().getAbsolutePath()
           + " : impossible to create", e);
