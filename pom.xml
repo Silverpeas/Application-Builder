@@ -14,9 +14,9 @@
   <name>application-builder</name>  
   
   <scm>
-    <connection>scm:svn:https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</connection>
-    <developerConnection>scm:svn:https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</developerConnection>
-    <url>https://www.silverpeas.org/svn/silverpeas/services/application-builder/trunk</url>
+    <connection>scm:git:git@github.com:Silverpeas/Application-Builder.git</connection>
+    <developerConnection>scm:git:git@github.com:Silverpeas/Application-Builder.git</developerConnection>
+    <url>https://github.com/Silverpeas/Application-Builder</url>
   </scm>
   
   <repositories>
