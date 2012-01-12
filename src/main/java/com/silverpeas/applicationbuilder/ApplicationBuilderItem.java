@@ -93,6 +93,7 @@ public class ApplicationBuilderItem {
   public ApplicationBuilderItem(File directory, String itemName) {
     setHome(directory);
     setName(itemName);
+
   }
 
   /**

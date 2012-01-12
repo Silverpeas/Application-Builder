@@ -42,6 +42,7 @@ public class DirectoryLocator {
   private static final String LIB_CONTRIB_SUBDIR = "java";
   private static final String CONTRIB_FILES_SUBDIR = "data";
   private static final String EJB_CONTRIB_SUBDIR = "ejb";
+  private static final String EXTERNAL_CONTRIB_SUBDIR = "external";
 
   /* MEMBERS */
 
@@ -64,6 +65,7 @@ public class DirectoryLocator {
   private static String libContribHome = null;
   private static String ejbContribHome = null;
   private static String contribFilesHome = null;
+  private static String externalFilesHome = null;
 
   /**
    * @return the Silverpeas install location
@@ -225,6 +227,14 @@ public class DirectoryLocator {
           + CONTRIB_FILES_SUBDIR;
     }
     return contribFilesHome;
+  }
+
+  public static String getExternalFilesHome() {
+    if (externalFilesHome == null) {
+      externalFilesHome = getRepositoryHome() + File.separator
+          + EXTERNAL_CONTRIB_SUBDIR;
+    }
+    return externalFilesHome;
   }
 
 }

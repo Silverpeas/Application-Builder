@@ -40,6 +40,7 @@ public class MavenContribution {
   public static final int TYPE_EJB = 1;
   public static final int TYPE_CLIENT = 2;
   public static final int TYPE_LIB = 3;
+  public static final int TYPE_EXTERNAL = 4;
   private int type;
   private transient final StringBuffer packageName = new StringBuffer();
   /** attributes */
@@ -48,6 +49,7 @@ public class MavenContribution {
       new ArrayList<ApplicationBuilderItem>();
   private ReadOnlyArchive warPart = null;
   private transient final List<ReadOnlyArchive> librairies = new ArrayList<ReadOnlyArchive>();
+  private transient final List<ReadOnlyArchive> externals = new ArrayList<ReadOnlyArchive>();
 
   public MavenContribution(final File contribution, final int type) throws AppBuilderException {
     this.type = type;
@@ -69,6 +71,9 @@ public class MavenContribution {
         break;
       case TYPE_LIB:
         librairies.add(new ReadOnlyArchive(contribution.getParentFile(), contribution.getName()));
+        break;
+      case TYPE_EXTERNAL:
+        externals.add(new ReadOnlyArchive(contribution.getParentFile(), contribution.getName()));
         break;
       default:
         break;
@@ -106,6 +111,10 @@ public class MavenContribution {
     return librairies.toArray(new ReadOnlyArchive[librairies.size()]);
   }
 
+  public ReadOnlyArchive[] getExternals() {
+    return externals.toArray(new ReadOnlyArchive[externals.size()]);
+  }
+
   public String getPackageName() {
     return packageName.toString();
   }
@@ -120,6 +129,8 @@ public class MavenContribution {
         return "CLIENT";
       case TYPE_LIB:
         return "LIBRAIRY";
+      case TYPE_EXTERNAL:
+        return "EXTERNAL";
       default:
         return "";
     }
