@@ -58,6 +58,7 @@ public class WARDirectory extends ApplicationBuilderItem {
    * @since 1.0
    */
   public WARDirectory(File directory, String fileName) throws AppBuilderException {
+    super(directory, fileName);
     warDir = new File(directory, fileName);
   }
 

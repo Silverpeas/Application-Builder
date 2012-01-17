@@ -25,8 +25,8 @@
 package com.silverpeas.applicationbuilder;
 
 import java.io.File;
-
-import com.silverpeas.installedtree.DirectoryLocator;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class dispatches the contributions parts in the target structures and then creates the
@@ -49,6 +49,7 @@ public class EAR extends EARDirectory {
 
   public EAR(File directory) throws AppBuilderException {
     super(directory, NAME);
+    //
     setWAR(this.earDir);
     setAppDescriptor();
     setName(NAME);
@@ -85,15 +86,13 @@ public class EAR extends EARDirectory {
     try {
       if (getWAR().getPath() != null && getWAR().getPath().exists()
           && !getWAR().getPath().delete()) {
-        Log.add("WARNING : could not delete \"" + getWAR().getName()
-            + "\" from temporary space");
+        Log.add("WARNING : could not delete \"" + getWAR().getName() + "\" from temporary space");
       }
     } catch (Exception e) {
       Log.add("WARNING : could not delete \"" + getWAR().getName()
           + "\" from temporary space");
       Log.add(e);
     }
-
     // Application descriptor
     add(getAppDescriptor());
   }
@@ -102,12 +101,11 @@ public class EAR extends EARDirectory {
    * Adds a set of EJBs and updates the application descriptor
    * @roseuid 3AAFC08C01E2
    */
-  public void addEJBs(ApplicationBuilderItem[] srcEjbs)
-      throws AppBuilderException {
-    for (int iEjb = 0; iEjb < srcEjbs.length; iEjb++) {
-      add(srcEjbs[iEjb]);
+  public void addEJBs(ApplicationBuilderItem[] srcEjbs) throws AppBuilderException {
+    for (ApplicationBuilderItem srcEjb : srcEjbs) {
+      add(srcEjb);
       // Adds the EJB name to the application descriptor
-      getAppDescriptor().addEJBName(srcEjbs[iEjb].getName());
+      getAppDescriptor().addEJBName(srcEjb.getName());
     }
   }
 
@@ -137,5 +135,15 @@ public class EAR extends EARDirectory {
     theAppDescriptor = new AppDescriptor();
     getAppDescriptor().setWARInfos(getWAR().getName(),
         ApplicationBuilder.getApplicationRoot());
+  }
+
+  void addExternalWars(ReadOnlyArchive[] externals) throws AppBuilderException {
+    for (ReadOnlyArchive externalArchive : externals) {
+      ExternalWar externalWar =
+          new ExternalWar(externalArchive.getHome(), externalArchive.getName());
+      String warName = externalWar.getName();
+      getAppDescriptor().setWARInfos(warName, warName.substring(0, warName.lastIndexOf('.')));
+      add(externalWar);
+    }
   }
 }

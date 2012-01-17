@@ -48,6 +48,7 @@ public class MavenRepository {
     loadEjbs();
     loadLibrairies();
     loadWarParts();
+    loadExternalParts();
   }
 
   protected void loadClients() throws AppBuilderException {
@@ -72,6 +73,13 @@ public class MavenRepository {
   protected void loadLibrairies() throws AppBuilderException {
     final File[] archives = listArchivesInDirectory(DirectoryLocator.getLibContribHome());
     contributions.add(new MavenContribution(archives, MavenContribution.TYPE_LIB));
+  }
+
+  protected void loadExternalParts() throws AppBuilderException {
+    final File[] archives = listArchivesInDirectory(DirectoryLocator.getExternalFilesHome());
+    for (File archive : archives) {
+      contributions.add(new MavenContribution(archive, MavenContribution.TYPE_EXTERNAL));
+    }
   }
 
   protected File[] listArchivesInDirectory(final String directoryPath) {

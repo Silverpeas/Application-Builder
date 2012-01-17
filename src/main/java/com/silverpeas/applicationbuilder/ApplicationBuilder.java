@@ -132,8 +132,7 @@ public class ApplicationBuilder {
     return APPLICATION_ROOT;
   }
 
-  private static void makeArchivesToDeploy()
-      throws AppBuilderException {
+  private static void makeArchivesToDeploy() throws AppBuilderException {
     Log.echo("CHECKING REPOSITORY");
     ApplicationBuilder appBuilder = new ApplicationBuilder();
     Log.add("Repository OK");
@@ -157,7 +156,6 @@ public class ApplicationBuilder {
       // client
       if (maContrib.getClientPart() != null) {
         Log.add("merging client part");
-        // appBuilder.getClient().mergeClientPart(maContrib.getClientPart());
         appBuilder.getEAR().addLibrary(maContrib.getClientPart());
       }
 
@@ -170,6 +168,11 @@ public class ApplicationBuilder {
       if (maContrib.getEJBs() != null) {
         Log.add("adding EJBs");
         appBuilder.getEAR().addEJBs(maContrib.getEJBs());
+      }
+
+      if (maContrib.getExternals() != null) {
+        Log.add("adding External Wars");
+        appBuilder.getEAR().addExternalWars(maContrib.getExternals());
       }
 
     }
@@ -200,6 +203,11 @@ public class ApplicationBuilder {
         if (maContrib.getEJBs() != null) {
           Log.add("adding EJBs");
           appBuilder.getEAR().addEJBs(maContrib.getEJBs());
+        }
+        // External WARs
+        if (maContrib.getExternals() != null) {
+          Log.add("adding External Wars");
+          appBuilder.getEAR().addExternalWars(maContrib.getExternals());
         }
 
       }

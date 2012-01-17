@@ -22,8 +22,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//Source file: R:\\StraProduct\\Pkg1.0\\Dev\\SrcJava\\Java\\ApplicationBuilder\\JBuilderEnv\\src\\com\\silverpeas\\applicationbuilder\\WAR.java
-
 package com.silverpeas.applicationbuilder;
 
 import java.io.File;
@@ -40,28 +38,17 @@ import java.util.Set;
  * @version 1.0/B
  * @since 1.0/B
  */
-public class WAR extends WARDirectory {
-
-  /**
-   * The name of the presentation part archive to build and to integrate to the application archive
-   * (EAR)
-   * @since 1.0/B
-   */
-  private static final String NAME = "war-ic.war";
+public class ExternalWar extends WARDirectory {
 
   private WARDescriptor theWARDescriptor;
 
   protected static final String MANIFEST_PATH = "META-INF" + File.separator
       + "MANIFEST.MF";
 
-  public WAR(File directory) throws AppBuilderException {
-    super(directory, NAME);
+  public ExternalWar(File directory, String name) throws AppBuilderException {
+    super(directory, name);
+    this.setName(name);
     setWARDescriptor();
-  }
-
-  @Override
-  public String getName() {
-    return NAME;
   }
 
   /**
@@ -92,7 +79,6 @@ public class WAR extends WARDirectory {
    */
   public void close() throws AppBuilderException {
     integrateDescriptor();
-    // super.close();
   }
 
   public WARDescriptor getWARDescriptor() {
