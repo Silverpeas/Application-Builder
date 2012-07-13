@@ -10,13 +10,14 @@
   <groupId>com.silverpeas.builder</groupId>
   <artifactId>application-builder</artifactId>
   <packaging>jar</packaging>
-  <version>1.8-SNAPSHOT</version>
+  <version>1.8</version>
   <name>application-builder</name>  
   
   <scm>
     <connection>scm:git:git@github.com:Silverpeas/Application-Builder.git</connection>
     <developerConnection>scm:git:git@github.com:Silverpeas/Application-Builder.git</developerConnection>
     <url>https://github.com/Silverpeas/Application-Builder</url>
+    <tag>application-builder-1.8</tag>
   </scm>
   
   <repositories>
