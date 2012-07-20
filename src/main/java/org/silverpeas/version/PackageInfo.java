@@ -1,27 +1,23 @@
 /**
  * Copyright (C) 2000 - 2009 Silverpeas
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Affero General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * As a special exception to the terms and conditions of version 3.0 of
- * the GPL, you may redistribute this Program in connection with Free/Libre
- * Open Source Software ("FLOSS") applications as described in Silverpeas's
- * FLOSS exception.  You should have received a copy of the text describing
- * the FLOSS exception, and it is also available here:
+ * As a special exception to the terms and conditions of version 3.0 of the GPL, you may
+ * redistribute this Program in connection with Free/Libre Open Source Software ("FLOSS")
+ * applications as described in Silverpeas's FLOSS exception. You should have received a copy of the
+ * text describing the FLOSS exception, and it is also available here:
  * "http://repository.silverpeas.com/legal/licensing"
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.silverpeas.version;
 
 import java.io.File;
@@ -29,7 +25,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.PropertyResourceBundle;
 
-public class PackageInfo implements Comparable {
+public class PackageInfo implements Comparable<PackageInfo> {
 
   // expected property names
   private static final String packageKey = "Package";
@@ -40,9 +36,9 @@ public class PackageInfo implements Comparable {
   private static final String releaseKey = "Release";
   private static final String buildKey = "Build";
   private static final String keyKey = "Key";
-
   private PropertyResourceBundle infos = null;
 
+  @Override
   public boolean equals(Object o) {
     if (!(o instanceof PackageInfo)) {
       return false;
@@ -51,17 +47,23 @@ public class PackageInfo implements Comparable {
         ((PackageInfo) o).getDisplayNameIfAvailable());
   }
 
-  public int compareTo(Object o) {
-    if (!(o instanceof PackageInfo)) {
-      return -1;
-    }
-    return getDisplayNameIfAvailable().compareTo(
-        ((PackageInfo) o).getDisplayNameIfAvailable());
+  @Override
+  public int hashCode() {
+    int hash = 3;
+    hash =
+        71 * hash + (this.getDisplayNameIfAvailable() != null ? this.getDisplayNameIfAvailable().
+        hashCode() : 0);
+    return hash;
+  }
+
+  @Override
+  public int compareTo(PackageInfo o) {
+    return getDisplayNameIfAvailable().compareTo(o.getDisplayNameIfAvailable());
   }
 
   public PackageInfo(File propertiesFile) throws MalformedURLException,
       IOException {
-    infos = new PropertyResourceBundle(propertiesFile.toURL().openStream());
+    infos = new PropertyResourceBundle(propertiesFile.toURI().toURL().openStream());
   }
 
   public String getName() {
@@ -77,11 +79,10 @@ public class PackageInfo implements Comparable {
   }
 
   public String getDisplayNameIfAvailable() {
-    if (getDisplayName().equals("")) {
+    if (getDisplayName().isEmpty()) {
       return getName();
-    } else {
-      return getDisplayName();
     }
+    return getDisplayName();
   }
 
   public String getBoxName() {
@@ -104,17 +105,17 @@ public class PackageInfo implements Comparable {
     return infos.getString(keyKey).trim();
   }
 
+  @Override
   public String toString() {
     String _displayName = getName();
-    if (!getDisplayName().equals("")) {
+    if (!getDisplayName().isEmpty()) {
       _displayName += "|" + getDisplayName();
     }
     _displayName += " " + getVersion();
-    if (!getBoxName().equals("")) {
+    if (!getBoxName().isEmpty()) {
       _displayName += " (" + getBoxName() + ")";
     }
-    return _displayName + " build:" + getBuildTag() + " release:"
-        + getReleaseId();
+    return _displayName + " build:" + getBuildTag() + " release:" + getReleaseId();
   }
 
   public static String specialName(String source) {
@@ -127,24 +128,22 @@ public class PackageInfo implements Comparable {
   }
 
   private static String sReplace(String search, String replace, String source) {
-
     int spot;
     String returnString;
     String origSource = new String(source);
-
     spot = source.indexOf(search);
-    if (spot > -1)
+    if (spot > -1) {
       returnString = "";
-    else
+    } else {
       returnString = source;
+    }
     while (spot > -1) {
       if (spot == source.length() + 1) {
-        returnString = returnString.concat(source.substring(0,
-            source.length() - 1).concat(replace));
+        returnString =
+            returnString.concat(source.substring(0, source.length() - 1).concat(replace));
         source = "";
       } else if (spot > 0) {
-        returnString = returnString.concat(source.substring(0, spot).concat(
-            replace));
+        returnString = returnString.concat(source.substring(0, spot).concat(replace));
         source = source.substring(spot + search.length(), source.length());
       } else {
         returnString = returnString.concat(replace);
@@ -154,9 +153,7 @@ public class PackageInfo implements Comparable {
     }
     if (!source.equals(origSource)) {
       return returnString.concat(source);
-    } else {
-      return returnString;
     }
+    return returnString;
   }
-
 }
