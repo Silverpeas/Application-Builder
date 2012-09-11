@@ -24,10 +24,10 @@
 
 package org.silverpeas.applicationbuilder;
 
+import java.io.File;
+import java.util.Date;
 import org.silverpeas.applicationbuilder.maven.MavenContribution;
 import org.silverpeas.applicationbuilder.maven.MavenRepository;
-import java.io.File;
-
 import org.silverpeas.installedtree.DirectoryLocator;
 
 /**
@@ -39,7 +39,8 @@ import org.silverpeas.installedtree.DirectoryLocator;
  */
 public class ApplicationBuilder {
 
-  private static final String APP_BUILDER_VERSION = "Application Builder V5.0";
+  public final static Date TODAY = new java.util.Date();
+  private static final String APP_BUILDER_VERSION = "Application Builder V5";
   private static final String APPLICATION_NAME = "Silverpeas";
   private static final String APPLICATION_DESCRIPTION = "Collaborative portal organizer";
   private static final String APPLICATION_ROOT = "silverpeas";
@@ -235,18 +236,18 @@ public class ApplicationBuilder {
    * @roseuid 3AB1EC140270
    */
   public static void main(String[] args) {
+    int status = 0;
     try {
-      Log.echo("___ " + APP_BUILDER_VERSION + " ___");
+      Log.echo(APP_BUILDER_VERSION + " (" + TODAY + ").");
       Log.add("");
       makeArchivesToDeploy();
-    } catch (AppBuilderException abe) {
-      Log.echo(abe);
-      endLoggingWithErrors();
     } catch (Throwable t) {
       Log.echo(t);
       endLoggingWithErrors();
+      status = 1;
     } finally {
       Log.close();
     }
+    System.exit(status);
   }
 }
