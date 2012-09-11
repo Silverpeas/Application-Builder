@@ -1,27 +1,23 @@
 /**
  * Copyright (C) 2000 - 2009 Silverpeas
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Affero General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * As a special exception to the terms and conditions of version 3.0 of
- * the GPL, you may redistribute this Program in connection with Free/Libre
- * Open Source Software ("FLOSS") applications as described in Silverpeas's
- * FLOSS exception.  You should have received a copy of the text describing
- * the FLOSS exception, and it is also available here:
+ * As a special exception to the terms and conditions of version 3.0 of the GPL, you may
+ * redistribute this Program in connection with Free/Libre Open Source Software ("FLOSS")
+ * applications as described in Silverpeas's FLOSS exception. You should have received a copy of the
+ * text describing the FLOSS exception, and it is also available here:
  * "http://repository.silverpeas.com/legal/licensing"
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.silverpeas.applicationbuilder;
 
 import java.io.File;
@@ -42,6 +38,8 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+
+import org.silverpeas.xml.ClasspathEntityResolver;
 
 /**
  * Represents an XML Document and provides convenient methods. The methods are used basically to
@@ -130,6 +128,7 @@ public class XmlDocument extends ApplicationBuilderItem {
    * Loads the document tree from the contents of an XML file provided as a stream. This can happen
    * when loading from an archive.
    * @param xmlStream the contents of an XML file
+   * @throws AppBuilderException
    * @since 1.0
    * @roseuid 3AAF4099035F
    */
@@ -139,6 +138,7 @@ public class XmlDocument extends ApplicationBuilderItem {
     // pour acces au DOCTYPE
     try {
       SAXBuilder builder = new SAXBuilder(false);
+      builder.setEntityResolver(new ClasspathEntityResolver(builder.getEntityResolver()));
       underlyingDocument = builder.build(xmlStream);
     } catch (IOException jde) {
       throw new AppBuilderException("Could not load \"" + getName()
@@ -154,10 +154,12 @@ public class XmlDocument extends ApplicationBuilderItem {
    * concerned by the array of tags from all the documents to merge and adds them to the resulting
    * document. <strong>In the resulting document, the comments, processing instructions and entities
    * are removed.</strong>
+   * @param tagsToMerge
+   * @param xmlFile
+   * @throws AppBuilderException
    * @roseuid 3AAF3793006E
    */
-  public void mergeWith(String[] tagsToMerge, XmlDocument xmlFile)
-      throws AppBuilderException {
+  public void mergeWith(String[] tagsToMerge, XmlDocument xmlFile) throws AppBuilderException {
     /**
      * gets the resulting document from the master document. Cloning the document is important. If
      * you clone or copy an element, the copy keeps his owner and, as a result, the element appears
@@ -166,11 +168,15 @@ public class XmlDocument extends ApplicationBuilderItem {
     Element root = getDocument().getRootElement();
     root.detach();
 
-    /** gets the root element of the documents to merge (excluding master) */
+    /**
+     * gets the root element of the documents to merge (excluding master)
+     */
     org.jdom.Document documentToBeMerged = (org.jdom.Document) xmlFile.getDocument().clone();
     Element tempRoot = documentToBeMerged.getRootElement();
 
-    /** gets all the elements which will be included in the resulting document */
+    /**
+     * gets all the elements which will be included in the resulting document
+     */
     for (int iTag = 0; iTag < tagsToMerge.length; iTag++) {
       for (Object child : tempRoot.getChildren(tagsToMerge[iTag], tempRoot.getNamespace())) {
         if (child instanceof Element) {
@@ -190,15 +196,15 @@ public class XmlDocument extends ApplicationBuilderItem {
     }
     setDocument(new Document(root));
 
-  } // mergeWith
+  }
 
   /**
    * Sorts the children elements of the document root according to the array order. The tags not
    * found in the array remain in the same order but at the beginning of the document
-   * @roseuid 3AAF3986038D
+   * @param tagsToSort
+   * @throws AppBuilderException
    */
-  public void sort(java.lang.String[] tagsToSort)
-      throws AppBuilderException {
+  public void sort(java.lang.String[] tagsToSort) throws AppBuilderException {
     /**
      * gets the resulting document from the master document. Cloning the document is important. If
      * you clone or copy an element, the copy keeps his owner and, as a result, the element appears
@@ -213,7 +219,9 @@ public class XmlDocument extends ApplicationBuilderItem {
     tempRoot.detach();
     tempRoot.removeContent();
 
-    /** Makes groups of elements by tag */
+    /**
+     * Makes groups of elements by tag
+     */
     List eltLstLst = new ArrayList(tagsToSort.length);
     for (int iTag = 0; iTag < tagsToSort.length; iTag++) {
       List children = root.getChildren(tagsToSort[iTag], root.getNamespace());
@@ -230,14 +238,18 @@ public class XmlDocument extends ApplicationBuilderItem {
       eltLstLst.add(iTag, eltLst);
     }
 
-    /** Orders the content of the resulting document */
+    /**
+     * Orders the content of the resulting document
+     */
     for (int iTag = 0; iTag < tagsToSort.length; iTag++) {
       if (!((List) eltLstLst.get(iTag)).isEmpty()) {
         tempRoot.addContent((List) eltLstLst.get(iTag));
       }
     }
 
-    /** the result */
+    /**
+     * the result
+     */
     return tempRoot;
   }
 
@@ -267,6 +279,7 @@ public class XmlDocument extends ApplicationBuilderItem {
   }
 
   /**
+   * @param doc
    * @since 1.0
    * @roseuid 3AB0FA640395
    */
@@ -277,6 +290,7 @@ public class XmlDocument extends ApplicationBuilderItem {
   /**
    * Gets the size of the resulting xml document
    * @return the size of the document in memory, given the encoding, <code>-1</code> if unknown.
+   * @throws AppBuilderException
    */
   public long getDocumentSize() throws AppBuilderException {
     if (getDocument() != null) {
@@ -286,17 +300,19 @@ public class XmlDocument extends ApplicationBuilderItem {
       if (getOutputEncoding().startsWith("UTF-16")) {
         docSize *= 2;
       }
-
       return docSize;
-    } else {
-      return -1;
     }
-
+    return -1;
   }
 
   /**
-   * Pour chaque élément à rechercher (tagsToFind) renvoie la valeur de l'attribut (attribute) ou de
-   * l'élément si l'attribut est null
+   * For each element in tagsToFind returns the value of the specified attribute or the value of the
+   * element if no attribute is found.
+   * @param tagsToFind
+   * @param attribute
+   * @return For each element in tagsToFind returns the value of the specified attribute or the
+   * value of the element if no attribute is found.
+   * @throws AppBuilderException
    */
   public String[] getAttributeValues(String[] tagsToFind, String attribute)
       throws AppBuilderException {
@@ -308,13 +324,14 @@ public class XmlDocument extends ApplicationBuilderItem {
     org.jdom.Document resultDoc = (org.jdom.Document) getDocument().clone();
     Element root = resultDoc.getRootElement();
 
-    List eltLst = null;
     int iTag;
 
-    /** Makes groups of elements by tag */
+    /**
+     * Makes groups of elements by tag
+     */
     List eltLstLst = new ArrayList(tagsToFind.length);
     for (iTag = 0; iTag < tagsToFind.length; iTag++) {
-      eltLst = root.getChildren(tagsToFind[iTag]);
+      List eltLst = root.getChildren(tagsToFind[iTag]);
       if (!eltLst.isEmpty()) {
         if (!root.removeChildren(tagsToFind[iTag])) {
           throw new AppBuilderException("Could not remove \""
@@ -331,7 +348,7 @@ public class XmlDocument extends ApplicationBuilderItem {
 
     String[] attributeValues = new String[eltLstLst.size()];
     for (int i = 0; i < eltLstLst.size(); i++) {
-      eltLst = (List) eltLstLst.get(i);
+      List eltLst = (List) eltLstLst.get(i);
       for (int j = 0; j < eltLst.size(); j++) {
         Element e = (Element) eltLst.get(j);
         if (attribute != null) {
@@ -405,7 +422,6 @@ public class XmlDocument extends ApplicationBuilderItem {
     for (int i = 0; i < result.length; i++) {
       result[i] = (String) objectArray[i];
     }
-
     return result;
   }
 
@@ -420,5 +436,4 @@ public class XmlDocument extends ApplicationBuilderItem {
     format.setIndent("    ");
     outputter = new XMLOutputter(format);
   }
-  // ################ XPath extension ###############
 }
